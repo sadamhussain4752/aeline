@@ -1,0 +1,60 @@
+AELINE — Next.js Website Setup
+================================
+
+QUICK START
+-----------
+1. Open a terminal in this folder
+2. Run:  npm install
+3. Run:  npm run dev
+4. Open: http://localhost:3000
+
+
+WHAT'S INCLUDED
+---------------
+- Next.js 14 (App Router)
+- Tailwind CSS
+- Three.js 3D animated hero background
+- Framer-style scroll animations (pure CSS/JS)
+- All 12 sections matching aeline.webflow.io/home/home-v2:
+    Navbar → Hero (3D) → Card Marquee → About → Logo Marquee
+    → Services → Expertise → Pricing → Testimonials → CTA → FAQ → Footer
+
+
+3D ANIMATION (Hero)
+-------------------
+components/ThreeScene.tsx — loaded client-side only (ssr: false).
+Features:
+  • Particle field (2,500 particles in purple/green/blue)
+  • Wireframe icosahedron that rotates
+  • Two glowing torus rings
+  • 12 floating geometric shapes (octahedron, tetrahedron, box)
+  • Mouse-parallax camera drift
+
+
+FOLDER STRUCTURE
+----------------
+app/
+  layout.tsx       Root layout + Inter font
+  page.tsx         Assembles all sections
+  globals.css      Tailwind + custom animations
+
+components/
+  Navbar.tsx       Fixed nav, mobile menu
+  Hero.tsx         Full-screen hero + 3D canvas
+  ThreeScene.tsx   Three.js 3D scene (client only)
+  CardMarquee.tsx  Scrolling service tag strip
+  About.tsx        Large headline + stats + marquee
+  LogoMarquee.tsx  Partner logo strip
+  Services.tsx     Tabbed service cards
+  Expertise.tsx    4 expertise cards with live UI
+  Pricing.tsx      3 pricing tiers
+  Testimonials.tsx Interactive testimonial cards
+  CTA.tsx          Trust section + stats
+  FAQ.tsx          Accordion FAQ
+  Footer.tsx       Links + newsletter form
+
+
+REQUIREMENTS
+------------
+Node.js 18+
+npm 9+
