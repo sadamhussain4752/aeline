@@ -1,17 +1,11 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-})
-
 export const metadata: Metadata = {
-  title: 'Aeline — AI Consulting & Strategy',
-  description: 'We help organizations unlock growth and efficiency through data-driven consulting and intelligent automation.',
+  title: 'Bravera - AI Consulting & Strategy',
+  description: 'Bravera helps organizations unlock growth through strategy, data, and intelligent automation.',
   openGraph: {
-    title: 'Aeline — AI Consulting & Strategy',
+    title: 'Bravera - AI Consulting & Strategy',
     description: 'Building the future with AI and strategy.',
     type: 'website',
   },
@@ -23,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="bg-bg-primary text-white antialiased">
+    <html lang="en">
+      <body>
         {children}
       </body>
     </html>

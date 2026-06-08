@@ -73,7 +73,7 @@ export default function Footer() {
                 </svg>
               </div>
               <span className="font-bold text-xl tracking-tight">
-                Aeline<span className="text-accent-green">.</span>
+                Bravera<span className="text-accent-green">.</span>
               </span>
             </Link>
 
@@ -142,7 +142,7 @@ export default function Footer() {
 
         {/* Bottom row */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/30">
-          <p>© 2026 Aeline Inc. All rights reserved.</p>
+          <p>© 2026 Bravera Inc. All rights reserved.</p>
 
           {/* Social icons */}
           <div className="flex items-center gap-3">

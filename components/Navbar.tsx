@@ -37,7 +37,7 @@ export default function Navbar() {
             </svg>
           </div>
           <span className="font-bold text-lg tracking-tight text-white">
-            Aeline
+            Bravera
             <span className="text-accent-green">.</span>
           </span>
         </Link>
