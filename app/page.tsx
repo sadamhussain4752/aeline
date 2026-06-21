@@ -1,19 +1,23 @@
-import { AboutSection, BlogSection, CTASection, ExpertiseSection, Hero, Marquee, PageShell, PortfolioGallery, PremiumSlider, PricingSection, ServicesSection, TestimonialsSection } from '@/components/AelineSite'
+import { AboutSection, BlogSection, CampaignMapSection, CTASection, ExpertiseSection, FAQSection, Hero, Marquee, PageShell, PortfolioGallery, PremiumSlider, PricingSection, ServicesSection, TestimonialsSection } from '@/components/AelineSite'
 
 export default function Home() {
   return (
     <PageShell>
-      <Hero />
-      <Marquee />
-      <PremiumSlider />
-      <ServicesSection />
-      <PortfolioGallery />
-      <AboutSection />
-      <ExpertiseSection />
-      <TestimonialsSection />
-      <PricingSection />
-      <BlogSection />
-      <CTASection />
+      <div className="home-pattern-frame">
+        <Hero />
+        <Marquee />
+        <CampaignMapSection />
+        <PremiumSlider />
+        <ServicesSection />
+        <PortfolioGallery />
+        <AboutSection />
+        <ExpertiseSection />
+        <TestimonialsSection />
+        <PricingSection />
+        <BlogSection />
+        <FAQSection />
+        <CTASection />
+      </div>
     </PageShell>
   )
 }

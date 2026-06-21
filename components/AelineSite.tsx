@@ -11,11 +11,54 @@ import { assets, faqs, plans, posts, services } from './aeline-content'
 const BraveraHeroScene = dynamic(() => import('./BraveraHeroScene'), { ssr: false })
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/about-us', label: 'About us' },
+  { href: '/about-us', label: 'About' },
   { href: '/services', label: 'Services' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/contact-us', label: 'Contact us' },
+  { href: '/stories', label: 'Stories' },
+  { href: '/contact-us', label: 'Contact Us' },
+]
+
+const digitalServices = [
+  'Digital Marketing Service',
+  'SEO',
+  'Website Design Development',
+  'Social Media Marketing',
+  'Creative Designing',
+  'Mobile Application',
+]
+
+const outdoorServices = [
+  'Marketing Collaterals',
+  'Hoarding',
+  'Paper Insert',
+  'Advertising in Public Places',
+  'Vehicle Branding (Bus, Auto, Metro)',
+]
+
+const campaignSections = [
+  {
+    kicker: 'Brand Strategy',
+    title: 'Strategy-led branding that gives every campaign a clear direction.',
+    text: 'We define positioning, voice, visual language, launch messaging, and campaign systems so your brand feels consistent online and outdoors.',
+    image: assets.about,
+  },
+  {
+    kicker: 'Social Media Marketing',
+    title: 'Daily content systems built for attention, trust, and measurable growth.',
+    text: 'From content calendars to creative design, paid campaigns, SEO-aligned posts, and performance reporting, we build social media that works as a brand engine.',
+    image: assets.card8,
+  },
+  {
+    kicker: 'Outdoor Marketing',
+    title: 'High-visibility outdoor campaigns for streets, transit, and public spaces.',
+    text: 'We plan and design hoardings, paper inserts, public-place advertising, marketing collaterals, and vehicle branding across bus, auto, and metro touchpoints.',
+    image: assets.card4,
+  },
+  {
+    kicker: 'Reels',
+    title: 'Short-form video concepts that move fast and feel unmistakably on brand.',
+    text: 'We build reels from idea to edit: hooks, scripts, visual systems, motion direction, and campaign-ready formats for social platforms.',
+    image: assets.card5,
+  },
 ]
 
 const sliderItems = [
@@ -112,15 +155,59 @@ export function Navbar() {
     <header className="navbar">
       <div className="nav-inner">
         <Link href="/" className="logo" aria-label="Bravera home">
-          <span className="logo-mark" aria-hidden="true" />
-          <span>Bravera.</span>
+          <img className="logo-image" src="/bravera-logo.png" alt="Bravera" />
         </Link>
         <nav className="nav-links" aria-label="Main navigation">
-          {navLinks.map((link) => (
-            <Link key={link.href} href={link.href}>
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            if (link.label !== 'Services') {
+              return (
+                <Link key={link.href} href={link.href}>
+                  {link.label}
+                </Link>
+              )
+            }
+
+            return (
+              <div className="nav-dropdown" key={link.href}>
+                <button className="nav-service-trigger" type="button" aria-haspopup="true">
+                  {link.label}
+                  <span aria-hidden="true">⌄</span>
+                </button>
+                <div className="services-mega-menu" role="menu" aria-label="Services menu">
+                  <Link href="/services" className="mega-feature outdoor" role="menuitem">
+                    <span className="mega-kicker">Outdoor Services</span>
+                    <strong>Outdoor Services</strong>
+                    <small>Know More</small>
+                  </Link>
+                  <Link href="/services" className="mega-feature digital" role="menuitem">
+                    <span className="mega-kicker">Digital Services</span>
+                    <strong>Digital Services</strong>
+                    <small>Know More</small>
+                  </Link>
+                  <div className="mega-list-panel">
+                    <p>Digital Services</p>
+                    <div>
+                      {digitalServices.slice(0, 6).map((service) => (
+                        <Link href="/services" key={service} role="menuitem">
+                          {service}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="mega-list-panel outdoor-list">
+                    <p>Outdoor Services</p>
+                    <div>
+                      {outdoorServices.map((service) => (
+                        <Link href="/services" key={service} role="menuitem">
+                          {service}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
         </nav>
       </div>
     </header>
@@ -134,8 +221,7 @@ export function Footer() {
         <div className="footer-grid">
           <div>
             <Link href="/" className="logo">
-              <span className="logo-mark" aria-hidden="true" />
-              <span>Bravera.</span>
+              <img className="logo-image" src="/bravera-logo.png" alt="Bravera" />
             </Link>
             <p className="lead">
               Easily adapt to changes and scale your operations with our flexible infrastructure, designed to support business growth.
@@ -170,7 +256,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
 
     const tiltCleanups: Array<() => void> = []
     const ctx = gsap.context(() => {
-      gsap.set('.gsap-fade, .section-title, .body-copy, .service-card, .price-card, .post-card, .stat-card, .image-card, .metric-panel, .faq-item, .timeline-item, .contact-card, .premium-slider-shell, .portfolio-card, .testimonial-card, .agency-proof', {
+      gsap.set('.gsap-fade, .section-title, .body-copy, .service-card, .service-list-panel, .campaign-card, .price-card, .post-card, .stat-card, .image-card, .metric-panel, .faq-item, .timeline-item, .contact-card, .premium-slider-shell, .portfolio-card, .testimonial-card, .agency-proof', {
         y: 34,
       })
 
@@ -209,7 +295,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
         },
       })
 
-      gsap.utils.toArray<HTMLElement>('.gsap-fade, .section-title, .body-copy, .image-card, .metric-panel, .cta-band, .faq-item, .timeline-item, .contact-card, .premium-slider-shell, .portfolio-card, .testimonial-card, .agency-proof').forEach((element) => {
+      gsap.utils.toArray<HTMLElement>('.gsap-fade, .section-title, .body-copy, .image-card, .metric-panel, .cta-band, .faq-item, .timeline-item, .contact-card, .premium-slider-shell, .portfolio-card, .testimonial-card, .agency-proof, .campaign-card, .service-list-panel').forEach((element) => {
         gsap.to(element, {
           y: 0,
           duration: 0.85,
@@ -221,7 +307,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
         })
       })
 
-      gsap.utils.toArray<HTMLElement>('.service-grid, .price-grid, .blog-grid, .stats-grid, .portfolio-grid, .testimonial-grid').forEach((grid) => {
+      gsap.utils.toArray<HTMLElement>('.service-grid, .price-grid, .blog-grid, .stats-grid, .portfolio-grid, .testimonial-grid, .campaign-map-grid, .service-list-panels').forEach((grid) => {
         gsap.to(grid.children, {
           y: 0,
           duration: 0.8,
@@ -264,7 +350,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
         })
       })
 
-      gsap.utils.toArray<HTMLElement>('.portfolio-card img, .agency-proof img').forEach((image) => {
+      gsap.utils.toArray<HTMLElement>('.portfolio-card img, .agency-proof img, .campaign-media img').forEach((image) => {
         gsap.to(image, {
           yPercent: -8,
           ease: 'none',
@@ -328,28 +414,7 @@ export function Hero() {
               <span aria-label="5 stars">★★★★★</span>
             </aside>
           </div>
-          <div className="hero-card-strip" aria-hidden="true">
-            <article className="mini-card mini-card-dark">
-              <p>Performance</p>
-              <strong>49%</strong>
-              <span>Business growth</span>
-            </article>
-            <article className="mini-card mini-card-glass">
-              <img src={assets.card6} alt="" />
-              <div>Calendar <small>Live</small></div>
-              <div>Messages <small>Live</small></div>
-            </article>
-            <article className="mini-card mini-card-light">
-              <div className="pill-cloud">
-                {['Professional', 'Strategic', 'AI-Focused', 'Smarter', 'Grow Faster'].map((item) => <span key={item}>{item}</span>)}
-              </div>
-              <p>Data Points</p>
-              <strong>520k+</strong>
-            </article>
-            <article className="mini-card mini-card-photo">
-              <img src={assets.card5} alt="" />
-            </article>
-          </div>
+        
         </div>
       </div>
     </section>
@@ -606,7 +671,7 @@ export function TestimonialsSection() {
 }
 
 export function Marquee() {
-  const words = ['Professional', 'Strategic', 'AI-Focused', 'Startup Feel', 'Smarter', 'Grow Faster', 'Build Smart', 'Simple']
+  const words = ['Brand Strategy', 'Digital Marketing', 'Social Media', 'Outdoor Marketing', 'Reels', 'SEO', 'Creative Design', 'Mobile Apps']
   return (
     <div className="marquee" aria-hidden="true">
       <div className="marquee-track">
@@ -615,6 +680,31 @@ export function Marquee() {
         ))}
       </div>
     </div>
+  )
+}
+
+export function CampaignMapSection() {
+  return (
+    <section className="section campaign-map-section" id="brand-strategy">
+      <div className="container">
+        <p className="eyebrow">Brand to Market</p>
+        <h2 className="section-title">Everything your campaign needs, shaped as one connected brand system</h2>
+        <div className="campaign-map-grid">
+          {campaignSections.map((section, index) => (
+            <article className={`campaign-card tilt-card ${index % 2 ? 'reverse' : ''}`} key={section.kicker} id={section.kicker.toLowerCase().replaceAll(' ', '-')}>
+              <div className="campaign-media">
+                <img src={section.image} alt="" />
+              </div>
+              <div className="campaign-copy">
+                <p className="eyebrow">{section.kicker}</p>
+                <h3>{section.title}</h3>
+                <p>{section.text}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }
 
@@ -665,8 +755,34 @@ export function ServicesSection({ full = false }: { full?: boolean }) {
       <div className="container">
         <p className="eyebrow">Services</p>
         <div className="split" style={{ alignItems: 'end' }}>
-          <h2 className="section-title">Comprehensive consulting and intelligent innovation</h2>
-          <p className="body-copy">Whether you’re optimizing today or building for tomorrow, we help you move faster with confidence.</p>
+          <h2 className="section-title">Digital and outdoor marketing services for brands that need visibility everywhere</h2>
+          <p className="body-copy">From search, websites, and social media to hoardings, print inserts, public spaces, and vehicle branding, we plan the full campaign path.</p>
+        </div>
+        <div className="service-list-panels">
+          <article className="service-list-panel tilt-card">
+            <div className="service-panel-media">
+              <img src={assets.card8} alt="" />
+            </div>
+            <div className="service-panel-copy">
+              <p className="eyebrow">Services (Digital)</p>
+              <h3>Digital services for search, social, websites, and mobile growth</h3>
+              <ol>
+                {digitalServices.map((service) => <li key={service}>{service}</li>)}
+              </ol>
+            </div>
+          </article>
+          <article className="service-list-panel outdoor tilt-card">
+            <div className="service-panel-media">
+              <img src={assets.card4} alt="" />
+            </div>
+            <div className="service-panel-copy">
+              <p className="eyebrow">Services (Outdoor)</p>
+              <h3>Outdoor services for public spaces, print, hoardings, and transit branding</h3>
+              <ol>
+                {outdoorServices.map((service) => <li key={service}>{service}</li>)}
+              </ol>
+            </div>
+          </article>
         </div>
         <div className="service-grid">
           {services.map((service) => (
@@ -745,11 +861,11 @@ export function BlogSection() {
   }, [])
 
   return (
-    <section className="section">
+    <section className="section" id="stories">
       <div className="container">
-        <p className="eyebrow">Blog and Articles</p>
+        <p className="eyebrow">Stories</p>
         <div className="split" style={{ alignItems: 'end' }}>
-          <h2 className="section-title">Latest insights and trends</h2>
+          <h2 className="section-title">Latest stories and trends</h2>
           <p className="body-copy">Whether you’re optimizing today or building for tomorrow, we help you move faster with confidence.</p>
         </div>
         <div className="blog-grid">
@@ -772,7 +888,7 @@ export function BlogSection() {
 
 export function FAQSection() {
   return (
-    <section className="section tight">
+    <section className="section tight" id="faq">
       <div className="container">
         <p className="eyebrow">FAQ</p>
         <h2 className="section-title">Frequently asked questions</h2>
@@ -791,7 +907,7 @@ export function FAQSection() {
 
 export function CTASection() {
   return (
-    <section className="section tight">
+    <section className="section tight" id="contact">
       <div className="container">
         <div className="cta-band">
           <div>

@@ -25,16 +25,16 @@ export default function BraveraHeroScene() {
     const ambient = new THREE.AmbientLight(0xffffff, 0.8)
     scene.add(ambient)
 
-    const keyLight = new THREE.PointLight(0xd6fd70, 3.4, 34)
+    const keyLight = new THREE.PointLight(0xc91d1d, 3.4, 34)
     keyLight.position.set(-5, 5, 8)
     scene.add(keyLight)
 
-    const blueLight = new THREE.PointLight(0x41c0ee, 2.4, 30)
+    const blueLight = new THREE.PointLight(0xb51616, 2.4, 30)
     blueLight.position.set(6, -3, 6)
     scene.add(blueLight)
 
     const ringMaterial = new THREE.MeshBasicMaterial({
-      color: 0xd6fd70,
+      color: 0xc91d1d,
       transparent: true,
       opacity: 0.32,
       side: THREE.DoubleSide,
@@ -42,7 +42,7 @@ export default function BraveraHeroScene() {
 
     const coreMaterial = new THREE.MeshStandardMaterial({
       color: 0xffffff,
-      emissive: 0x41c0ee,
+      emissive: 0xb51616,
       emissiveIntensity: 0.34,
       roughness: 0.22,
       metalness: 0.72,
@@ -70,8 +70,8 @@ export default function BraveraHeroScene() {
     const particleCount = 520
     const positions = new Float32Array(particleCount * 3)
     const colors = new Float32Array(particleCount * 3)
-    const lime = new THREE.Color(0xd6fd70)
-    const cyan = new THREE.Color(0x41c0ee)
+    const brandRed = new THREE.Color(0xc91d1d)
+    const deepRed = new THREE.Color(0xb51616)
 
     for (let i = 0; i < particleCount; i += 1) {
       const radius = 4.5 + Math.random() * 5.8
@@ -81,7 +81,7 @@ export default function BraveraHeroScene() {
       positions[i * 3 + 1] = y
       positions[i * 3 + 2] = Math.sin(angle) * radius * 0.52
 
-      const color = Math.random() > 0.5 ? lime : cyan
+      const color = Math.random() > 0.5 ? brandRed : deepRed
       colors[i * 3] = color.r
       colors[i * 3 + 1] = color.g
       colors[i * 3 + 2] = color.b

@@ -1,11 +1,11 @@
 export const assets = {
-  hero: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1800&q=85',
+  hero: 'https://images.unsplash.com/photo-1529119368496-2dfda6ec2804?auto=format&fit=crop&w=1800&q=85',
   about: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=85',
-  card1: 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=85',
-  card4: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=85',
-  card5: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=85',
+  card1: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=85',
+  card4: 'https://images.unsplash.com/photo-1513757378314-e46255f6ed16?auto=format&fit=crop&w=1200&q=85',
+  card5: 'https://images.unsplash.com/photo-1764162051296-63c5cddf6ba6?auto=format&fit=crop&w=1200&q=85',
   card6: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85',
-  card8: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85',
+  card8: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=85',
 }
 
 export const services = [
