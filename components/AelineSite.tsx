@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import { useEffect, useState, useRef } from 'react'
 import gsap from 'gsap'
@@ -32,6 +33,67 @@ const outdoorServices = [
   'Paper Insert',
   'Advertising in Public Places',
   'Vehicle Branding (Bus, Auto, Metro)',
+]
+
+const digitalServiceCards = [
+  {
+    title: 'Digital Marketing Service',
+    text: 'Performance campaigns, content planning, audience targeting, and reporting built to turn attention into measurable leads.',
+    image: assets.card8,
+  },
+  {
+    title: 'SEO',
+    text: 'Technical SEO, keyword planning, content structure, and search visibility improvements for long-term organic growth.',
+    image: 'https://images.unsplash.com/photo-1562577309-4932fdd64cd1?auto=format&fit=crop&w=1200&q=85',
+  },
+  {
+    title: 'Website Design Development',
+    text: 'Modern websites with clear UX, fast performance, responsive layouts, and conversion-focused content presentation.',
+    image: assets.card1,
+  },
+  {
+    title: 'Social Media Marketing',
+    text: 'Daily creative systems for social posts, campaigns, community growth, paid promotion, and platform-ready brand content.',
+    image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&w=1200&q=85',
+  },
+  {
+    title: 'Creative Designing',
+    text: 'Campaign visuals, brand assets, launch graphics, print-ready layouts, and digital creatives with one consistent style.',
+    image: assets.about,
+  },
+  {
+    title: 'Mobile Application',
+    text: 'User-friendly mobile app experiences, interface planning, feature flows, and scalable product presentation.',
+    image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=1200&q=85',
+  },
+]
+
+const outdoorServiceCards = [
+  {
+    title: 'Marketing Collaterals',
+    text: 'Brochures, flyers, posters, product sheets, and brand materials designed for strong offline recall.',
+    image: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=1200&q=85',
+  },
+  {
+    title: 'Hoarding',
+    text: 'Large-format outdoor hoarding concepts with bold messaging, clean layouts, and high-distance readability.',
+    image: assets.card4,
+  },
+  {
+    title: 'Paper Insert',
+    text: 'Newspaper and leaflet insert campaigns planned with clear offers, local reach, and sharp print design.',
+    image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=85',
+  },
+  {
+    title: 'Advertising in Public Places',
+    text: 'Public-space campaign ideas for malls, streets, events, transit points, and high-footfall visibility.',
+    image: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=85',
+  },
+  {
+    title: 'Vehicle Branding (Bus, Auto, Metro)',
+    text: 'Transit branding systems for buses, autos, metro placements, and moving outdoor impressions.',
+    image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=85',
+  },
 ]
 
 const campaignSections = [
@@ -151,6 +213,8 @@ export function ArrowButton({
 }
 
 export function Navbar() {
+  const pathname = usePathname()
+
   return (
     <header className="navbar">
       <div className="nav-inner">
@@ -161,7 +225,7 @@ export function Navbar() {
           {navLinks.map((link) => {
             if (link.label !== 'Services') {
               return (
-                <Link key={link.href} href={link.href}>
+                <Link key={link.href} href={link.href} className={pathname === link.href ? 'active' : undefined}>
                   {link.label}
                 </Link>
               )
@@ -169,10 +233,14 @@ export function Navbar() {
 
             return (
               <div className="nav-dropdown" key={link.href}>
-                <button className="nav-service-trigger" type="button" aria-haspopup="true">
+                <Link
+                  href={link.href}
+                  className={`nav-service-trigger ${pathname === link.href ? 'active' : ''}`}
+                  aria-haspopup="true"
+                >
                   {link.label}
                   <span aria-hidden="true">⌄</span>
-                </button>
+                </Link>
                 <div className="services-mega-menu" role="menu" aria-label="Services menu">
                   <Link href="/services" className="mega-feature outdoor" role="menuitem">
                     <span className="mega-kicker">Outdoor Services</span>
@@ -256,7 +324,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
 
     const tiltCleanups: Array<() => void> = []
     const ctx = gsap.context(() => {
-      gsap.set('.gsap-fade, .section-title, .body-copy, .service-card, .service-list-panel, .campaign-card, .price-card, .post-card, .stat-card, .image-card, .metric-panel, .faq-item, .timeline-item, .contact-card, .premium-slider-shell, .portfolio-card, .testimonial-card, .agency-proof', {
+      gsap.set('.gsap-fade, .section-title, .body-copy, .service-card, .service-list-panel, .service-detail-card, .campaign-card, .price-card, .post-card, .stat-card, .image-card, .metric-panel, .faq-item, .timeline-item, .contact-card, .premium-slider-shell, .portfolio-card, .testimonial-card, .agency-proof', {
         y: 34,
       })
 
@@ -350,7 +418,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
         })
       })
 
-      gsap.utils.toArray<HTMLElement>('.portfolio-card img, .agency-proof img, .campaign-media img').forEach((image) => {
+      gsap.utils.toArray<HTMLElement>('.portfolio-card img, .agency-proof img, .campaign-media img, .service-detail-media img').forEach((image) => {
         gsap.to(image, {
           yPercent: -8,
           ease: 'none',
@@ -758,45 +826,96 @@ export function ServicesSection({ full = false }: { full?: boolean }) {
           <h2 className="section-title">Digital and outdoor marketing services for brands that need visibility everywhere</h2>
           <p className="body-copy">From search, websites, and social media to hoardings, print inserts, public spaces, and vehicle branding, we plan the full campaign path.</p>
         </div>
-        <div className="service-list-panels">
-          <article className="service-list-panel tilt-card">
-            <div className="service-panel-media">
-              <img src={assets.card8} alt="" />
-            </div>
-            <div className="service-panel-copy">
-              <p className="eyebrow">Services (Digital)</p>
-              <h3>Digital services for search, social, websites, and mobile growth</h3>
-              <ol>
-                {digitalServices.map((service) => <li key={service}>{service}</li>)}
-              </ol>
-            </div>
-          </article>
-          <article className="service-list-panel outdoor tilt-card">
-            <div className="service-panel-media">
-              <img src={assets.card4} alt="" />
-            </div>
-            <div className="service-panel-copy">
-              <p className="eyebrow">Services (Outdoor)</p>
-              <h3>Outdoor services for public spaces, print, hoardings, and transit branding</h3>
-              <ol>
-                {outdoorServices.map((service) => <li key={service}>{service}</li>)}
-              </ol>
-            </div>
-          </article>
-        </div>
-        <div className="service-grid">
-          {services.map((service) => (
-            <article key={service.title} className={`service-card tilt-card ${service.dark ? 'dark-card' : ''}`}>
-              <div className="card-media">
-                <img src={service.image} alt="" />
+        {!full ? (
+          <div className="service-list-panels">
+            <article className="service-list-panel tilt-card">
+              <div className="service-panel-media">
+                <img src={assets.card8} alt="" />
               </div>
-              <p className="eyebrow">{service.title.split(' ')[0]}</p>
-              <h3>{service.title}</h3>
-              <p className="body-copy" style={{ marginTop: 14 }}>{service.text}</p>
-              {full ? <ArrowButton href="/contact-us" dark={!service.dark}>Learn more</ArrowButton> : null}
+              <div className="service-panel-copy">
+                <p className="eyebrow">Services (Digital)</p>
+                <h3>Digital services for search, social, websites, and mobile growth</h3>
+                <ol>
+                  {digitalServices.map((service) => <li key={service}>{service}</li>)}
+                </ol>
+              </div>
             </article>
-          ))}
-        </div>
+            <article className="service-list-panel outdoor tilt-card">
+              <div className="service-panel-media">
+                <img src={assets.card4} alt="" />
+              </div>
+              <div className="service-panel-copy">
+                <p className="eyebrow">Services (Outdoor)</p>
+                <h3>Outdoor services for public spaces, print, hoardings, and transit branding</h3>
+                <ol>
+                  {outdoorServices.map((service) => <li key={service}>{service}</li>)}
+                </ol>
+              </div>
+            </article>
+          </div>
+        ) : null}
+        {full ? (
+          <div className="service-detail-groups">
+            <div className="service-detail-group">
+              <div className="service-detail-heading">
+                <p className="eyebrow">Services (Digital)</p>
+                <h3>Digital growth services with focused execution for every channel</h3>
+              </div>
+              <div className="service-detail-grid">
+                {digitalServiceCards.map((service, index) => (
+                  <article className="service-detail-card tilt-card" key={service.title}>
+                    <div className="service-detail-media">
+                      <img src={service.image} alt="" />
+                      <span>{String(index + 1).padStart(2, '0')}</span>
+                    </div>
+                    <div className="service-detail-copy">
+                      <p className="eyebrow">Digital</p>
+                      <h4>{service.title}</h4>
+                      <p>{service.text}</p>
+                      <Link href="/contact-us" className="service-detail-link">Plan this service</Link>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+            <div className="service-detail-group">
+              <div className="service-detail-heading">
+                <p className="eyebrow">Services (Outdoor)</p>
+                <h3>Outdoor visibility services for streets, print, transit, and public spaces</h3>
+              </div>
+              <div className="service-detail-grid outdoor-detail-grid">
+                {outdoorServiceCards.map((service, index) => (
+                  <article className="service-detail-card outdoor-detail-card tilt-card" key={service.title}>
+                    <div className="service-detail-media">
+                      <img src={service.image} alt="" />
+                      <span>{String(index + 1).padStart(2, '0')}</span>
+                    </div>
+                    <div className="service-detail-copy">
+                      <p className="eyebrow">Outdoor</p>
+                      <h4>{service.title}</h4>
+                      <p>{service.text}</p>
+                      <Link href="/contact-us" className="service-detail-link">Plan this service</Link>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : null}
+        {!full ? (
+          <div className="service-grid">
+            {services.map((service) => (
+              <article key={service.title} className={`service-card tilt-card ${service.dark ? 'dark-card' : ''}`}>
+                <div className="card-media">
+                  <img src={service.image} alt="" />
+                </div>
+                <p className="eyebrow">{service.title.split(' ')[0]}</p>
+                <h3>{service.title}</h3>
+                <p className="body-copy" style={{ marginTop: 14 }}>{service.text}</p>
+              </article>
+            ))}
+          </div>
+        ) : null}
       </div>
     </section>
   )
