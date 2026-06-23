@@ -99,27 +99,35 @@ const outdoorServiceCards = [
 const campaignSections = [
   {
     kicker: 'Brand Strategy',
+    label: 'Branding',
     title: 'Strategy-led branding that gives every campaign a clear direction.',
     text: 'We define positioning, voice, visual language, launch messaging, and campaign systems so your brand feels consistent online and outdoors.',
-    image: assets.about,
+    image: '/branding.png',
+    color: '#b51f1c',
   },
   {
     kicker: 'Social Media Marketing',
+    label: 'Marketing',
     title: 'Daily content systems built for attention, trust, and measurable growth.',
     text: 'From content calendars to creative design, paid campaigns, SEO-aligned posts, and performance reporting, we build social media that works as a brand engine.',
-    image: assets.card8,
+    image: '/marketing.png',
+    color: '#a84f22',
   },
   {
     kicker: 'Outdoor Marketing',
+    label: 'Outdoor',
     title: 'High-visibility outdoor campaigns for streets, transit, and public spaces.',
     text: 'We plan and design hoardings, paper inserts, public-place advertising, marketing collaterals, and vehicle branding across bus, auto, and metro touchpoints.',
-    image: assets.card4,
+    image: '/packaging.png',
+    color: '#7b3827',
   },
   {
     kicker: 'Reels',
+    label: 'Reels',
     title: 'Short-form video concepts that move fast and feel unmistakably on brand.',
     text: 'We build reels from idea to edit: hooks, scripts, visual systems, motion direction, and campaign-ready formats for social platforms.',
-    image: assets.card5,
+    image: '/packaging.png',
+    color: '#92251e',
   },
 ]
 
@@ -195,6 +203,44 @@ const testimonials = [
   },
 ]
 
+const reelsItems = [
+  {
+    title: 'Product Launch Campaign',
+    category: 'Social Campaign',
+    description: 'Bold opener for a new product launch with motion graphics and trending audio.',
+    thumbnail: assets.card1,
+    color: '#FF6B6B',
+  },
+  {
+    title: 'Brand Story Reel',
+    category: 'Brand Storytelling',
+    description: 'Behind-the-scenes look at how we build products, shot in cinematic style.',
+    thumbnail: assets.card4,
+    color: '#4ECDC4',
+  },
+  {
+    title: 'Tutorial & Education',
+    category: 'How-To Content',
+    description: 'Quick 15-second tutorial showing product features with clear on-screen text.',
+    thumbnail: assets.card8,
+    color: '#45B7D1',
+  },
+  {
+    title: 'Customer Testimonial',
+    category: 'Social Proof',
+    description: 'Real customer success story with authentic footage and impactful messaging.',
+    thumbnail: assets.about,
+    color: '#96CEB4',
+  },
+  {
+    title: 'Trending Audio Reel',
+    category: 'Viral Content',
+    description: 'Trendy audio hook paired with eye-catching visuals optimized for engagement.',
+    thumbnail: assets.card5,
+    color: '#FFEAA7',
+  },
+]
+
 export function ArrowButton({
   href,
   children,
@@ -252,26 +298,7 @@ export function Navbar() {
                     <strong>Digital Services</strong>
                     <small>Know More</small>
                   </Link>
-                  <div className="mega-list-panel">
-                    <p>Digital Services</p>
-                    <div>
-                      {digitalServices.slice(0, 6).map((service) => (
-                        <Link href="/services" key={service} role="menuitem">
-                          {service}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="mega-list-panel outdoor-list">
-                    <p>Outdoor Services</p>
-                    <div>
-                      {outdoorServices.map((service) => (
-                        <Link href="/services" key={service} role="menuitem">
-                          {service}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
+                 
                 </div>
               </div>
             )
@@ -289,16 +316,21 @@ export function Footer() {
         <div className="footer-grid">
           <div>
             <Link href="/" className="logo">
-              <img className="logo-image" src="/bravera-logo.png" alt="Bravera" />
+              <img className="logo-image" src="/bravera-logo.png" alt="Bravera logo" />
             </Link>
             <p className="lead">
               Easily adapt to changes and scale your operations with our flexible infrastructure, designed to support business growth.
             </p>
-            <form className="newsletter">
-              <input aria-label="Email address" placeholder="Subscribe our newsletter" type="email" />
-              <button className="button dark" type="button">Submit</button>
+            <form className="newsletter" aria-label="Subscribe to newsletter">
+              <input
+                aria-label="Email address"
+                placeholder="Enter your email"
+                type="email"
+              />
+              <button className="button dark" type="submit">Subscribe</button>
             </form>
           </div>
+
           <nav className="footer-links" aria-label="Footer navigation">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href}>
@@ -307,7 +339,11 @@ export function Footer() {
             ))}
           </nav>
         </div>
-        <p style={{ color: 'rgba(255,255,255,.52)', marginTop: 24 }}>© 2026 Bravera Inc. All rights reserved.</p>
+
+        <div className="footer-bottom">
+          <p>© 2026 Bravera Inc. All rights reserved.</p>
+          <div className="footer-note">Built with Next.js & Three.js</div>
+        </div>
       </div>
     </footer>
   )
@@ -324,7 +360,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
 
     const tiltCleanups: Array<() => void> = []
     const ctx = gsap.context(() => {
-      gsap.set('.gsap-fade, .section-title, .body-copy, .service-card, .service-list-panel, .service-detail-card, .campaign-card, .price-card, .post-card, .stat-card, .image-card, .metric-panel, .faq-item, .timeline-item, .contact-card, .premium-slider-shell, .portfolio-card, .testimonial-card, .agency-proof', {
+      gsap.set('.gsap-fade, .section-title, .body-copy, .service-card, .service-list-panel, .service-detail-card, .adams-project-slide, .price-card, .post-card, .stat-card, .image-card, .metric-panel, .faq-item, .timeline-item, .contact-card, .premium-slider-shell, .portfolio-card, .testimonial-card, .agency-proof', {
         y: 34,
       })
 
@@ -340,16 +376,6 @@ export function PageShell({ children }: { children: React.ReactNode }) {
         }, '-=0.45')
         .from('.hero-orbit, .hero-three-scene', { x: 28, rotateY: -18, duration: 0.9 }, '-=0.6')
 
-      gsap.to('.hero-bg', {
-        yPercent: 10,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '.hero',
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      })
 
       gsap.to('.hero-orbit, .hero-three-scene', {
         y: -26,
@@ -363,7 +389,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
         },
       })
 
-      gsap.utils.toArray<HTMLElement>('.gsap-fade, .section-title, .body-copy, .image-card, .metric-panel, .cta-band, .faq-item, .timeline-item, .contact-card, .premium-slider-shell, .portfolio-card, .testimonial-card, .agency-proof, .campaign-card, .service-list-panel').forEach((element) => {
+      gsap.utils.toArray<HTMLElement>('.gsap-fade, .section-title, .body-copy, .image-card, .metric-panel, .cta-band, .faq-item, .timeline-item, .contact-card, .premium-slider-shell, .portfolio-card, .testimonial-card, .agency-proof, .adams-project-slide, .service-list-panel').forEach((element) => {
         gsap.to(element, {
           y: 0,
           duration: 0.85,
@@ -375,7 +401,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
         })
       })
 
-      gsap.utils.toArray<HTMLElement>('.service-grid, .price-grid, .blog-grid, .stats-grid, .portfolio-grid, .testimonial-grid, .campaign-map-grid, .service-list-panels').forEach((grid) => {
+      gsap.utils.toArray<HTMLElement>('.service-grid, .price-grid, .blog-grid, .stats-grid, .portfolio-grid, .testimonial-grid, .service-list-panels').forEach((grid) => {
         gsap.to(grid.children, {
           y: 0,
           duration: 0.8,
@@ -418,7 +444,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
         })
       })
 
-      gsap.utils.toArray<HTMLElement>('.portfolio-card img, .agency-proof img, .campaign-media img, .service-detail-media img').forEach((image) => {
+      gsap.utils.toArray<HTMLElement>('.portfolio-card img, .agency-proof img, .service-detail-media img').forEach((image) => {
         gsap.to(image, {
           yPercent: -8,
           ease: 'none',
@@ -452,9 +478,8 @@ export function Hero() {
     <section className="hero">
       <div className="">
         <div className="hero-frame">
-          <img src={assets.hero} alt="" className="hero-bg" />
-          <BraveraHeroScene />
-          <div className="hero-orbit" aria-hidden="true">
+          {/* <BraveraHeroScene /> */}
+          {/* <div className="hero-orbit" aria-hidden="true">
             <div className="orbit-ring orbit-ring-large" />
             <div className="orbit-ring orbit-ring-small" />
             <div className="orbit-card orbit-card-top">
@@ -465,7 +490,7 @@ export function Hero() {
               <span>Weekly Lift</span>
               <strong>+49%</strong>
             </div>
-          </div>
+          </div> */}
           <div className="hero-content">
             <h1>
               <span>Building the future with</span>
@@ -752,24 +777,91 @@ export function Marquee() {
 }
 
 export function CampaignMapSection() {
+  const sectionRef = useRef<HTMLElement | null>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const activeSection = campaignSections[activeIndex]
+
+  useEffect(() => {
+    const image = document.querySelector('.adams-product-image')
+    const copy = document.querySelector('.adams-sticky-copy')
+    if (!image || !copy) return
+
+    gsap.fromTo(
+      image,
+      { autoAlpha: 0, scale: 0.94, y: 24 },
+      { autoAlpha: 1, scale: 1, y: 0, duration: 0.55, ease: 'power3.out' }
+    )
+    gsap.fromTo(
+      copy,
+      { autoAlpha: 0, y: 34 },
+      { autoAlpha: 1, y: 0, duration: 0.55, ease: 'power3.out' }
+    )
+  }, [activeIndex])
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduceMotion) return
+
+    const section = sectionRef.current
+    if (!section) return
+
+    const trigger = ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: () => `+=${window.innerHeight * (campaignSections.length - 1)}`,
+      pin: '.adams-pin-stage',
+      pinSpacing: true,
+      scrub: 0.6,
+      anticipatePin: 1,
+      onUpdate: (self) => {
+        const nextIndex = Math.min(
+          campaignSections.length - 1,
+          Math.round(self.progress * (campaignSections.length - 1))
+        )
+        setActiveIndex((currentIndex) => (currentIndex === nextIndex ? currentIndex : nextIndex))
+      },
+    })
+
+    return () => {
+      trigger.kill()
+    }
+  }, [])
+
   return (
-    <section className="section campaign-map-section" id="brand-strategy">
-      <div className="container">
-        <p className="eyebrow">Brand to Market</p>
-        <h2 className="section-title">Everything your campaign needs, shaped as one connected brand system</h2>
-        <div className="campaign-map-grid">
-          {campaignSections.map((section, index) => (
-            <article className={`campaign-card tilt-card ${index % 2 ? 'reverse' : ''}`} key={section.kicker} id={section.kicker.toLowerCase().replaceAll(' ', '-')}>
-              <div className="campaign-media">
-                <img src={section.image} alt="" />
-              </div>
-              <div className="campaign-copy">
-                <p className="eyebrow">{section.kicker}</p>
-                <h3>{section.title}</h3>
-                <p>{section.text}</p>
-              </div>
-            </article>
-          ))}
+    <section
+      ref={sectionRef}
+      className="campaign-map-section adams-scroll-section"
+      id="brand-strategy"
+      style={{ '--adams-active': activeSection.color } as React.CSSProperties}
+    >
+      <div className="adams-content">
+        <div className="adams-pin-stage">
+          <div className="adams-sticky-visual" aria-hidden="true">
+            <div className="adams-project-visual">
+              <img className="adams-product-image" src={activeSection.image} alt="" />
+            </div>
+          </div>
+
+          <div className="adams-sticky-copy">
+            <div className="adams-project-title">
+              <h3>{activeSection.label}</h3>
+            </div>
+            <div className="adams-project-info">
+              <p>{activeSection.title}</p>
+              <span>{activeSection.text}</span>
+              <Link href="/services" className="adams-project-link">Read Case Study</Link>
+            </div>
+          </div>
+
+          <div className="adams-scroll-progress" aria-hidden="true">
+            {campaignSections.map((section, index) => (
+              <span className={activeIndex === index ? 'active' : ''} key={section.kicker}>
+                {section.kicker}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -1061,6 +1153,232 @@ export function PageHero({
         </div>
         <div className="page-hero-visual">
           <img src={image} alt="" />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function SocialMediaMarketingSection() {
+  return (
+    <section className="section" id="social-media">
+      <div className="container split">
+        <div>
+          <p className="eyebrow">Social Media Marketing</p>
+          <h2 className="section-title">Daily content systems built for attention and growth</h2>
+          <p className="body-copy" style={{ marginTop: 20 }}>
+            From strategic content calendars to creative design, paid campaigns, SEO-aligned posts, and performance reporting. We build social media that works as a brand engine, turning engagement into measurable business results.
+          </p>
+          <div style={{ marginTop: 32 }}>
+            <ArrowButton href="/contact-us">Get Started</ArrowButton>
+          </div>
+        </div>
+        <div className="image-card">
+          <img src={assets.card8} alt="Social Media Marketing" />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function OutdoorMarketingSection() {
+  return (
+    <section className="section" id="outdoor-marketing">
+      <div className="container split">
+        <div className="image-card">
+          <img src={assets.card4} alt="Outdoor Marketing" />
+        </div>
+        <div>
+          <p className="eyebrow">Outdoor Marketing</p>
+          <h2 className="section-title">High-visibility campaigns for streets and public spaces</h2>
+          <p className="body-copy" style={{ marginTop: 20 }}>
+            We plan and design hoardings, paper inserts, public-place advertising, marketing collaterals, and vehicle branding. Strategic outdoor placements across bus, auto, and metro touchpoints to maximize brand visibility and impact.
+          </p>
+          <div style={{ marginTop: 32 }}>
+            <ArrowButton href="/contact-us">Get Started</ArrowButton>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function ReelsSection() {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const shellRef = useRef<HTMLDivElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
+
+  const goToSlide = (index: number) => {
+    const nextIndex = (index + reelsItems.length) % reelsItems.length
+    setActiveIndex(nextIndex)
+  }
+
+  useEffect(() => {
+    const shell = shellRef.current
+    const track = trackRef.current
+    if (!shell || !track) return
+
+    const ctx = gsap.context(() => {
+      gsap.to(track, {
+        xPercent: -activeIndex * 100,
+        duration: 0.85,
+        ease: 'power3.inOut',
+      })
+    }, shell)
+
+    return () => ctx.revert()
+  }, [activeIndex])
+
+  return (
+    <section className="section" id="reels">
+      <div className="container">
+        <div style={{ marginBottom: 56 }}>
+          <p className="eyebrow">Reels & Short-Form Video</p>
+          <h2 className="section-title">Short-form video concepts that move fast</h2>
+          <p className="body-copy" style={{ marginTop: 20, maxWidth: 620 }}>
+            We build reels from idea to final edit: hooks, scripts, visual systems, motion direction, and campaign-ready formats optimized for social platforms.
+          </p>
+        </div>
+
+        <div ref={shellRef} className="reels-carousel" style={{ position: 'relative', overflow: 'hidden' }}>
+          <div ref={trackRef} style={{ display: 'flex', width: '100%' }}>
+            {reelsItems.map((reel, index) => (
+              <div
+                key={reel.title}
+                style={{
+                  minWidth: '100%',
+                  padding: '0 12px',
+                  boxSizing: 'border-box',
+                }}
+              >
+                <div
+                  className="reel-card"
+                  style={{
+                    position: 'relative',
+                    height: 480,
+                    borderRadius: 24,
+                    overflow: 'hidden',
+                    background: `linear-gradient(135deg, ${reel.color}20 0%, ${reel.color}05 100%)`,
+                    border: `1px solid rgba(255,255,255,0.08)`,
+                  }}
+                >
+                  <img
+                    src={reel.thumbnail}
+                    alt={reel.title}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      padding: 24,
+                      background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)',
+                      color: 'white',
+                    }}
+                  >
+                    <p style={{ fontSize: 12, opacity: 0.7, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                      {reel.category}
+                    </p>
+                    <h3 style={{ fontSize: 22, fontWeight: 700, marginBottom: 8 }}>{reel.title}</h3>
+                    <p style={{ fontSize: 14, opacity: 0.9, lineHeight: 1.6 }}>{reel.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={() => goToSlide(activeIndex - 1)}
+            style={{
+              position: 'absolute',
+              left: -48,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: 44,
+              height: 44,
+              borderRadius: '50%',
+              background: 'rgba(255,255,255,0.08)',
+              border: '1px solid rgba(255,255,255,0.12)',
+              color: 'white',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: 20,
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.15)'
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.08)'
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'
+            }}
+            aria-label="Previous reel"
+          >
+            ←
+          </button>
+
+          <button
+            onClick={() => goToSlide(activeIndex + 1)}
+            style={{
+              position: 'absolute',
+              right: -48,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: 44,
+              height: 44,
+              borderRadius: '50%',
+              background: 'rgba(255,255,255,0.08)',
+              border: '1px solid rgba(255,255,255,0.12)',
+              color: 'white',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: 20,
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.15)'
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.08)'
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'
+            }}
+            aria-label="Next reel"
+          >
+            →
+          </button>
+
+          {/* Indicators */}
+          <div style={{ display: 'flex', gap: 8, justifyContent: 'center', marginTop: 32 }}>
+            {reelsItems.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveIndex(index)}
+                style={{
+                  width: activeIndex === index ? 32 : 8,
+                  height: 8,
+                  borderRadius: 999,
+                  background: activeIndex === index ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.2)',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                }}
+                aria-label={`Go to reel ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

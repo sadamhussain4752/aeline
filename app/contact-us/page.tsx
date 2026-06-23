@@ -37,12 +37,7 @@ export default function ContactPage() {
 
   return (
     <PageShell>
-      <PageHero
-        eyebrow="Contact us"
-        title="Start building smarter systems with Bravera"
-        text="Tell us what you are trying to improve, automate, or understand. We will shape a clear next step."
-        image={assets.about}
-      />
+      
       <section className="section">
         <div className="container">
           <p className="eyebrow">Get Started</p>

@@ -14,7 +14,12 @@ export default function BraveraHeroScene() {
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
     camera.position.set(0, 0, 13)
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
+    let renderer: THREE.WebGLRenderer
+    try {
+      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
+    } catch {
+      return
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6))
     renderer.setClearColor(0x000000, 0)
     container.appendChild(renderer.domElement)
