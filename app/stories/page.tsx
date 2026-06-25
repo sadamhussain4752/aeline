@@ -17,7 +17,7 @@ export default function StoriesPage() {
       <PageHero
         eyebrow="Stories"
         title="Latest stories and trends"
-        text="Ideas, examples, and campaign lessons for brands building stronger digital and outdoor visibility."
+        text="Ideas, examples, and campaign lessons for brands building stronger digital and offline visibility."
         image={assets.card8}
       />
       <BlogSection />

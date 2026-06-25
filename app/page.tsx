@@ -1,15 +1,29 @@
-import { CampaignMapSection, FAQSection, Hero, PageShell, SocialMediaMarketingSection, OutdoorMarketingSection, ReelsSection } from '@/components/AelineSite'
+import {
+  CampaignMapSection,
+  CTASection,
+  FAQSection,
+  Hero,
+  Marquee,
+  PageShell,
+  PortfolioGallery,
+  ReelsSection,
+  ServicesSection,
+  TestimonialsSection,
+} from '@/components/AelineSite'
 
 export default function Home() {
   return (
     <PageShell>
       <div className="home-pattern-frame">
         <Hero />
+        <Marquee />
         <CampaignMapSection />
-        <SocialMediaMarketingSection />
-        <OutdoorMarketingSection />
+        <ServicesSection />
+        <PortfolioGallery />
         <ReelsSection />
+        <TestimonialsSection />
         <FAQSection />
+        <CTASection />
       </div>
     </PageShell>
   )

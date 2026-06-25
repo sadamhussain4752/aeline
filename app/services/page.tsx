@@ -10,9 +10,10 @@ export default function ServicesPage() {
         text="From strategy to implementation, we create solutions that deliver measurable impact."
         image={assets.card6}
       />
+            <ServicesSection full />
+
       <Marquee />
-      <ServicesSection full />
-      <ExpertiseSection />
+      {/* <ExpertiseSection /> */}
       <section className="section">
         <div className="container split">
           <div>

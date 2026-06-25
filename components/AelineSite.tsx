@@ -7,7 +7,7 @@ import { useEffect, useState, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { getStoredPosts } from './local-data'
-import { assets, faqs, plans, posts, services } from './aeline-content'
+import { assets, faqs, plans, posts } from './aeline-content'
 
 const BraveraHeroScene = dynamic(() => import('./BraveraHeroScene'), { ssr: false })
 
@@ -27,12 +27,13 @@ const digitalServices = [
   'Mobile Application',
 ]
 
-const outdoorServices = [
+const offlineServices = [
   'Marketing Collaterals',
-  'Hoarding',
-  'Paper Insert',
-  'Advertising in Public Places',
-  'Vehicle Branding (Bus, Auto, Metro)',
+  'Out of Home',
+  'Paper insert',
+  'Transit Media',
+  'Retail Branding & Signages',
+  'Events and activations',
 ]
 
 const digitalServiceCards = [
@@ -68,31 +69,36 @@ const digitalServiceCards = [
   },
 ]
 
-const outdoorServiceCards = [
+const offlineServiceCards = [
   {
     title: 'Marketing Collaterals',
-    text: 'Brochures, flyers, posters, product sheets, and brand materials designed for strong offline recall.',
+    text: 'Brochures, flyers, posters, product sheets, and branded print assets designed for strong offline recall.',
     image: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=1200&q=85',
   },
   {
-    title: 'Hoarding',
-    text: 'Large-format outdoor hoarding concepts with bold messaging, clean layouts, and high-distance readability.',
+    title: 'Out of Home',
+    text: 'Large-format OOH campaigns with bold messaging, clean layouts, and high-distance readability.',
     image: assets.card4,
   },
   {
-    title: 'Paper Insert',
+    title: 'Paper insert',
     text: 'Newspaper and leaflet insert campaigns planned with clear offers, local reach, and sharp print design.',
     image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=85',
   },
   {
-    title: 'Advertising in Public Places',
-    text: 'Public-space campaign ideas for malls, streets, events, transit points, and high-footfall visibility.',
-    image: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=85',
+    title: 'Transit Media',
+    text: 'Campaign systems for buses, autos, metro placements, stations, and moving audience impressions.',
+    image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=85',
   },
   {
-    title: 'Vehicle Branding (Bus, Auto, Metro)',
-    text: 'Transit branding systems for buses, autos, metro placements, and moving outdoor impressions.',
-    image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=85',
+    title: 'Retail Branding & Signages',
+    text: 'In-store visibility, fascia design, wayfinding, POSM, and signage systems for stronger retail presence.',
+    image: 'https://images.unsplash.com/photo-1607082349566-187342175e2f?auto=format&fit=crop&w=1200&q=85',
+  },
+  {
+    title: 'Events and activations',
+    text: 'Launch events, booth branding, on-ground activations, and audience engagement ideas built for recall.',
+    image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=85',
   },
 ]
 
@@ -101,7 +107,7 @@ const campaignSections = [
     kicker: 'Brand Strategy',
     label: 'Branding',
     title: 'Strategy-led branding that gives every campaign a clear direction.',
-    text: 'We define positioning, voice, visual language, launch messaging, and campaign systems so your brand feels consistent online and outdoors.',
+    text: 'We define positioning, voice, visual language, launch messaging, and campaign systems so your brand feels consistent online and offline.',
     image: '/branding.png',
     color: '#b51f1c',
   },
@@ -114,21 +120,14 @@ const campaignSections = [
     color: '#a84f22',
   },
   {
-    kicker: 'Outdoor Marketing',
-    label: 'Outdoor',
-    title: 'High-visibility outdoor campaigns for streets, transit, and public spaces.',
-    text: 'We plan and design hoardings, paper inserts, public-place advertising, marketing collaterals, and vehicle branding across bus, auto, and metro touchpoints.',
+    kicker: 'Offline Marketing',
+    label: 'Offline',
+    title: 'High-visibility offline campaigns for streets, retail, transit, and events.',
+    text: 'We plan and design marketing collaterals, out-of-home, paper inserts, transit media, retail branding, signages, events, and activations.',
     image: '/packaging.png',
     color: '#7b3827',
   },
-  {
-    kicker: 'Reels',
-    label: 'Reels',
-    title: 'Short-form video concepts that move fast and feel unmistakably on brand.',
-    text: 'We build reels from idea to edit: hooks, scripts, visual systems, motion direction, and campaign-ready formats for social platforms.',
-    image: '/packaging.png',
-    color: '#92251e',
-  },
+  
 ]
 
 const sliderItems = [
@@ -208,36 +207,79 @@ const reelsItems = [
     title: 'Product Launch Campaign',
     category: 'Social Campaign',
     description: 'Bold opener for a new product launch with motion graphics and trending audio.',
-    thumbnail: assets.card1,
+    thumbnail: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=85',
     color: '#FF6B6B',
   },
   {
     title: 'Brand Story Reel',
     category: 'Brand Storytelling',
     description: 'Behind-the-scenes look at how we build products, shot in cinematic style.',
-    thumbnail: assets.card4,
+    thumbnail: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=900&q=85',
     color: '#4ECDC4',
   },
   {
     title: 'Tutorial & Education',
     category: 'How-To Content',
     description: 'Quick 15-second tutorial showing product features with clear on-screen text.',
-    thumbnail: assets.card8,
+    thumbnail: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=900&q=85',
     color: '#45B7D1',
   },
   {
     title: 'Customer Testimonial',
     category: 'Social Proof',
     description: 'Real customer success story with authentic footage and impactful messaging.',
-    thumbnail: assets.about,
+    thumbnail: 'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=900&q=85',
     color: '#96CEB4',
   },
   {
     title: 'Trending Audio Reel',
     category: 'Viral Content',
     description: 'Trendy audio hook paired with eye-catching visuals optimized for engagement.',
-    thumbnail: assets.card5,
+    thumbnail: 'https://images.unsplash.com/photo-1584302179602-e4c3d3fd629d?auto=format&fit=crop&w=900&q=85',
     color: '#FFEAA7',
+  },
+]
+
+const cinematicServices = [
+  {
+    title: 'Branding',
+    text: 'Identity systems, positioning, visual language, and launch-ready brand worlds.',
+    icon: '01',
+  },
+  {
+    title: 'Social Media Marketing',
+    text: 'Content engines, paid social, community growth, and campaign calendars.',
+    icon: '02',
+  },
+  {
+    title: 'Offline Marketing',
+    text: 'OOH, paper inserts, transit media, retail branding, signages, events, and activations.',
+    icon: '03',
+  },
+  {
+    title: 'Reels & Short Videos',
+    text: 'Hooks, scripts, shoots, edits, motion direction, and platform-ready reels.',
+    icon: '04',
+  },
+  {
+    title: 'Digital Campaigns',
+    text: 'Performance funnels, landing journeys, SEO, and measurable acquisition systems.',
+    icon: '05',
+  },
+  {
+    title: 'AI Automation',
+    text: 'Smarter workflows, AI-assisted operations, reporting, and customer journeys.',
+    icon: '06',
+  },
+  {
+    title: 'Creative Strategy',
+    text: 'Campaign concepts, story systems, audience insight, and creative direction.',
+    icon: '07',
+  },
+  {
+    title: 'Performance Marketing',
+    text: 'Media planning, conversion tracking, optimization, and growth experiments.',
+    icon: '08',
   },
 ]
 
@@ -285,15 +327,14 @@ export function Navbar() {
                   aria-haspopup="true"
                 >
                   {link.label}
-                  <span aria-hidden="true">⌄</span>
                 </Link>
                 <div className="services-mega-menu" role="menu" aria-label="Services menu">
-                  <Link href="/services" className="mega-feature outdoor" role="menuitem">
-                    <span className="mega-kicker">Outdoor Services</span>
-                    <strong>Outdoor Services</strong>
+                  <Link href="/services#offline-services" className="mega-feature outdoor" role="menuitem">
+                    <span className="mega-kicker">Services (Offline)</span>
+                    <strong>Offline Services</strong>
                     <small>Know More</small>
                   </Link>
-                  <Link href="/services" className="mega-feature digital" role="menuitem">
+                  <Link href="/services#digital-services" className="mega-feature digital" role="menuitem">
                     <span className="mega-kicker">Digital Services</span>
                     <strong>Digital Services</strong>
                     <small>Know More</small>
@@ -351,6 +392,8 @@ export function Footer() {
 
 export function PageShell({ children }: { children: React.ReactNode }) {
   const shellRef = useRef<HTMLElement>(null)
+  const pathname = usePathname()
+  const isHome = pathname === '/'
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -358,105 +401,419 @@ export function PageShell({ children }: { children: React.ReactNode }) {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduceMotion || !shellRef.current) return
 
+    
+
     const tiltCleanups: Array<() => void> = []
-    const ctx = gsap.context(() => {
-      gsap.set('.gsap-fade, .section-title, .body-copy, .service-card, .service-list-panel, .service-detail-card, .adams-project-slide, .price-card, .post-card, .stat-card, .image-card, .metric-panel, .faq-item, .timeline-item, .contact-card, .premium-slider-shell, .portfolio-card, .testimonial-card, .agency-proof', {
-        y: 34,
-      })
-
-      const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } })
-      heroTl
-        .from('.nav-inner', { y: -28, duration: 0.75 })
-        .from('.hero-frame, .page-hero', { scale: 0.965, duration: 0.95 }, '-=0.35')
-        .from('.hero h1, .page-hero h1', { y: 52, duration: 0.9 }, '-=0.45')
-        .from('.hero .lead, .page-hero .lead, .hero-actions, .rating-strip, .page-hero-visual', {
-          y: 28,
-          duration: 0.75,
-          stagger: 0.08,
-        }, '-=0.45')
-        .from('.hero-orbit, .hero-three-scene', { x: 28, rotateY: -18, duration: 0.9 }, '-=0.6')
-
-
-      gsap.to('.hero-orbit, .hero-three-scene', {
-        y: -26,
-        rotate: 2,
-        ease: 'none',
+const ctx = gsap.context(() => {
+  const reveal = (
+    selector: string,
+    fromVars: gsap.TweenVars,
+    toVars: gsap.TweenVars = {}
+  ) => {
+    gsap.utils.toArray<HTMLElement>(selector).forEach((el) => {
+      gsap.fromTo(el, fromVars, {
+        ...toVars,
         scrollTrigger: {
-          trigger: '.hero',
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
+          trigger: el,
+          start: 'top 85%',
+          once: true,
         },
       })
+    })
+  }
 
-      gsap.utils.toArray<HTMLElement>('.gsap-fade, .section-title, .body-copy, .image-card, .metric-panel, .cta-band, .faq-item, .timeline-item, .contact-card, .premium-slider-shell, .portfolio-card, .testimonial-card, .agency-proof, .adams-project-slide, .service-list-panel').forEach((element) => {
-        gsap.to(element, {
-          y: 0,
-          duration: 0.85,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: element,
-            start: 'top 86%',
-          },
-        })
-      })
+  // Navbar
+  gsap.from('.nav-inner', {
+    y: -40,
+    opacity: 0,
+    duration: 0.8,
+    ease: 'power3.out',
+  })
 
-      gsap.utils.toArray<HTMLElement>('.service-grid, .price-grid, .blog-grid, .stats-grid, .portfolio-grid, .testimonial-grid, .service-list-panels').forEach((grid) => {
-        gsap.to(grid.children, {
-          y: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: grid,
-            start: 'top 82%',
-          },
-        })
-      })
+  // Hero
+  gsap.from('.hero-frame', {
+    scale: 0.94,
+    opacity: 0,
+    duration: 1,
+    ease: 'power3.out',
+  })
 
-      gsap.utils.toArray<HTMLElement>('.tilt-card').forEach((card) => {
-        const onMove = (event: PointerEvent) => {
-          const rect = card.getBoundingClientRect()
-          const x = (event.clientX - rect.left) / rect.width - 0.5
-          const y = (event.clientY - rect.top) / rect.height - 0.5
-          gsap.to(card, {
-            rotateY: x * 8,
-            rotateX: y * -8,
-            y: -6,
-            duration: 0.45,
-            ease: 'power2.out',
-          })
-        }
-        const onLeave = () => {
-          gsap.to(card, {
-            rotateY: 0,
-            rotateX: 0,
-            y: 0,
-            duration: 0.6,
-            ease: 'elastic.out(1, 0.55)',
-          })
-        }
-        card.addEventListener('pointermove', onMove)
-        card.addEventListener('pointerleave', onLeave)
-        tiltCleanups.push(() => {
-          card.removeEventListener('pointermove', onMove)
-          card.removeEventListener('pointerleave', onLeave)
-        })
-      })
+  gsap.from('.hero-word', {
+    y: 90,
+    opacity: 0,
+    rotateX: 75,
+    filter: 'blur(18px)',
+    duration: 1,
+    stagger: 0.08,
+    ease: 'power4.out',
+    delay: 0.2,
+  })
 
-      gsap.utils.toArray<HTMLElement>('.portfolio-card img, .agency-proof img, .service-detail-media img').forEach((image) => {
-        gsap.to(image, {
-          yPercent: -8,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: image,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          },
-        })
+  gsap.from('.hero-kicker', {
+    x: -40,
+    opacity: 0,
+    duration: 0.8,
+    delay: 0.3,
+    ease: 'power3.out',
+  })
+
+  gsap.from('.hero-lead', {
+    y: 35,
+    opacity: 0,
+    duration: 0.85,
+    delay: 0.9,
+    ease: 'power3.out',
+  })
+
+  gsap.from('.hero-actions', {
+    scale: 0.88,
+    opacity: 0,
+    duration: 0.8,
+    delay: 1.1,
+    ease: 'back.out(1.7)',
+  })
+
+  gsap.from('.rating-strip', {
+    x: 60,
+    opacity: 0,
+    duration: 0.8,
+    delay: 1.25,
+    ease: 'power3.out',
+  })
+
+  // Hero scroll parallax
+  gsap.to('.hero-orbit, .hero-three-scene', {
+    y: -90,
+    scale: 1.08,
+    rotate: 4,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true,
+    },
+  })
+
+  gsap.to('.hero-frame', {
+    '--heroGlowX': '72%',
+    '--heroGlowY': '22%',
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true,
+    },
+  })
+
+  // Section headings
+  reveal('.section-title', {
+    y: 70,
+    opacity: 0,
+    filter: 'blur(10px)',
+  }, {
+    y: 0,
+    opacity: 1,
+    filter: 'blur(0px)',
+    duration: 0.9,
+    ease: 'power3.out',
+  })
+
+  reveal('.body-copy, .lead', {
+    y: 35,
+    opacity: 0,
+  }, {
+    y: 0,
+    opacity: 1,
+    duration: 0.75,
+    ease: 'power3.out',
+  })
+
+  reveal('.eyebrow', {
+    y: 20,
+    opacity: 0,
+  }, {
+    y: 0,
+    opacity: 1,
+    duration: 0.65,
+    ease: 'power3.out',
+  })
+
+  // About
+  reveal('.about-title', {
+    scale: 0.92,
+    opacity: 0,
+    y: 40,
+  }, {
+    scale: 1,
+    opacity: 1,
+    y: 0,
+    duration: 0.9,
+    ease: 'power3.out',
+  })
+
+  reveal('.about-stats .stat-card', {
+    y: 70,
+    opacity: 0,
+    rotate: -3,
+    scale: 0.92,
+  }, {
+    y: 0,
+    opacity: 1,
+    rotate: 0,
+    scale: 1,
+    duration: 0.85,
+    ease: 'back.out(1.4)',
+  })
+
+  // Services
+  reveal('.cinematic-service-card', {
+    opacity: 0,
+    y: 80,
+    rotateY: -22,
+    scale: 0.92,
+    transformPerspective: 1000,
+  }, {
+    opacity: 1,
+    y: 0,
+    rotateY: 0,
+    scale: 1,
+    duration: 0.9,
+    ease: 'power3.out',
+  })
+
+  reveal('.service-category-card', {
+    opacity: 0,
+    y: 70,
+    scale: 0.95,
+  }, {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    duration: 0.9,
+    ease: 'power3.out',
+  })
+
+  reveal('.service-detail-card', {
+    opacity: 0,
+    x: -70,
+    scale: 0.96,
+  }, {
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    duration: 0.85,
+    ease: 'power3.out',
+  })
+
+  // Premium slider
+  reveal('.premium-slider-shell', {
+    opacity: 0,
+    y: 80,
+    scale: 0.96,
+  }, {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    duration: 1,
+    ease: 'power4.out',
+  })
+
+  // Campaign map
+  reveal('.adams-pin-stage', {
+    opacity: 0,
+    y: 80,
+    scale: 0.96,
+  }, {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    duration: 1,
+    ease: 'power4.out',
+  })
+
+  // Portfolio
+  reveal('.portfolio-card', {
+    opacity: 0,
+    scale: 1.08,
+    clipPath: 'inset(18% 18% 18% 18% round 28px)',
+  }, {
+    opacity: 1,
+    scale: 1,
+    clipPath: 'inset(0% 0% 0% 0% round 28px)',
+    duration: 1,
+    ease: 'power4.out',
+  })
+
+  // Expertise
+  reveal('.metric-panel', {
+    opacity: 0,
+    x: -80,
+    scale: 0.94,
+  }, {
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    duration: 0.9,
+    ease: 'power3.out',
+  })
+
+  // Pricing
+  reveal('.price-card', {
+    opacity: 0,
+    y: 70,
+    scale: 0.85,
+  }, {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    duration: 0.85,
+    ease: 'back.out(1.6)',
+  })
+
+  // Blog
+  reveal('.post-card', {
+    opacity: 0,
+    y: 80,
+    rotate: 2,
+    scale: 0.95,
+  }, {
+    opacity: 1,
+    y: 0,
+    rotate: 0,
+    scale: 1,
+    duration: 0.85,
+    ease: 'power3.out',
+  })
+
+  // FAQ
+  reveal('.faq-item', {
+    opacity: 0,
+    x: -45,
+  }, {
+    opacity: 1,
+    x: 0,
+    duration: 0.75,
+    ease: 'power3.out',
+  })
+
+  // Contact / CTA
+  reveal('.cta-band', {
+    opacity: 0,
+    scale: 0.9,
+    y: 50,
+  }, {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    duration: 0.95,
+    ease: 'power4.out',
+  })
+
+  reveal('.contact-card', {
+    opacity: 0,
+    y: 60,
+    scale: 0.94,
+  }, {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    duration: 0.85,
+    ease: 'power3.out',
+  })
+
+  // Page hero
+  reveal('.page-hero', {
+    opacity: 0,
+    scale: 0.96,
+    y: 40,
+  }, {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    duration: 0.95,
+    ease: 'power3.out',
+  })
+
+  reveal('.page-hero-visual', {
+    opacity: 0,
+    x: 70,
+    rotateY: -14,
+  }, {
+    opacity: 1,
+    x: 0,
+    rotateY: 0,
+    duration: 1,
+    ease: 'power3.out',
+  })
+
+  // Reels
+  reveal('.reel-phone-card', {
+    opacity: 0,
+    y: 80,
+    scale: 0.8,
+    rotateY: -20,
+  }, {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    rotateY: 0,
+    duration: 0.85,
+    ease: 'back.out(1.5)',
+  })
+
+  // Image parallax
+  gsap.utils.toArray<HTMLElement>(
+    '.portfolio-card img, .agency-proof img, .service-detail-media img, .image-card img'
+  ).forEach((image) => {
+    gsap.to(image, {
+      yPercent: -8,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: image,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true,
+      },
+    })
+  })
+
+  // Tilt cards
+  gsap.utils.toArray<HTMLElement>('.tilt-card').forEach((card) => {
+    const onMove = (event: PointerEvent) => {
+      const rect = card.getBoundingClientRect()
+      const x = (event.clientX - rect.left) / rect.width - 0.5
+      const y = (event.clientY - rect.top) / rect.height - 0.5
+
+      gsap.to(card, {
+        rotateY: x * 8,
+        rotateX: y * -8,
+        y: -6,
+        duration: 0.45,
+        ease: 'power2.out',
       })
-    }, shellRef)
+    }
+
+    const onLeave = () => {
+      gsap.to(card, {
+        rotateY: 0,
+        rotateX: 0,
+        y: 0,
+        duration: 0.6,
+        ease: 'elastic.out(1, 0.55)',
+      })
+    }
+
+    card.addEventListener('pointermove', onMove)
+    card.addEventListener('pointerleave', onLeave)
+
+    tiltCleanups.push(() => {
+      card.removeEventListener('pointermove', onMove)
+      card.removeEventListener('pointerleave', onLeave)
+    })
+  })
+}, shellRef)
 
     return () => {
       tiltCleanups.forEach((cleanup) => cleanup())
@@ -464,8 +821,43 @@ export function PageShell({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
+  useEffect(() => {
+    const shell = shellRef.current
+    if (!shell || !isHome) return
+
+    const cursor = shell.querySelector<HTMLElement>('.cinematic-cursor')
+    const progress = shell.querySelector<HTMLElement>('.scroll-progress-bar span')
+
+    const onPointerMove = (event: PointerEvent) => {
+      if (!cursor) return
+      cursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`
+    }
+
+    const onScroll = () => {
+      if (!progress) return
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight
+      const amount = maxScroll > 0 ? window.scrollY / maxScroll : 0
+      progress.style.transform = `scaleX(${Math.min(1, Math.max(0, amount))})`
+    }
+
+    window.addEventListener('pointermove', onPointerMove)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+
+    return () => {
+      window.removeEventListener('pointermove', onPointerMove)
+      window.removeEventListener('scroll', onScroll)
+    }
+  }, [isHome])
+
   return (
-    <main className="site-shell" ref={shellRef}>
+    <main className={`site-shell ${isHome ? 'home-cinematic-shell' : ''}`} ref={shellRef}>
+      {isHome ? (
+        <>
+          <div className="scroll-progress-bar" aria-hidden="true"><span /></div>
+          <div className="cinematic-cursor" aria-hidden="true" />
+        </>
+      ) : null}
       <Navbar />
       {children}
       <Footer />
@@ -473,41 +865,83 @@ export function PageShell({ children }: { children: React.ReactNode }) {
   )
 }
 
+
+
 export function Hero() {
+  const words = [
+    { text: 'Building', className: 'hero-word slide-up' },
+    { text: 'Brands', className: 'hero-word rotate-in' },
+    { text: 'That', className: 'hero-word blur-in' },
+    { text: 'Move', className: 'hero-word zoom-in' },
+    { text: 'People', className: 'hero-word slide-right' },
+    { text: 'Online', className: 'hero-word fade-up' },
+    { text: '&', className: 'hero-word spin-in' },
+    { text: 'Offline', className: 'hero-word glow-in' },
+  ]
+
   return (
     <section className="hero">
-      <div className="">
-        <div className="hero-frame">
-          {/* <BraveraHeroScene /> */}
-          {/* <div className="hero-orbit" aria-hidden="true">
-            <div className="orbit-ring orbit-ring-large" />
-            <div className="orbit-ring orbit-ring-small" />
-            <div className="orbit-card orbit-card-top">
-              <span>AI Status</span>
-              <strong>98.6%</strong>
-            </div>
-            <div className="orbit-card orbit-card-bottom">
-              <span>Weekly Lift</span>
-              <strong>+49%</strong>
-            </div>
-          </div> */}
-          <div className="hero-content">
-            <h1>
-              <span>Building the future with</span>
-              <span className="hero-muted">AI and strategy</span>
-            </h1>
-            <p className="lead">
-              We help organizations unlock growth and efficiency through data-driven consulting and intelligent automation.
-            </p>
-            <div className="hero-actions">
-              <ArrowButton href="/contact-us">Get Started</ArrowButton>
-            </div>
-            <aside className="rating-strip">
-              <p>Rated 4.9/5 by 4,900+ clients</p>
-              <span aria-label="5 stars">★★★★★</span>
-            </aside>
+      <div className="hero-frame">
+        <BraveraHeroScene />
+
+        <div className="hero-visual-stack" aria-hidden="true">
+          <span className="glass-orb glass-orb-main" />
+          <span className="glass-orb glass-orb-blue" />
+          <span className="glass-orb glass-orb-pink" />
+          <span className="neon-line neon-line-one" />
+          <span className="neon-line neon-line-two" />
+        </div>
+
+        <div className="hero-noise" />
+
+        <div className="hero-content">
+
+          <p className="eyebrow hero-kicker">
+            Brand systems / Social / Offline / AI
+          </p>
+
+          <h1 className="hero-title">
+            {words.map((item, index) => (
+              <span
+                key={item.text}
+                className={item.className}
+                style={{
+                  animationDelay: `${index * 0.15}s`,
+                }}
+              >
+                {item.text}
+              </span>
+            ))}
+          </h1>
+
+          <p className="lead hero-lead">
+            We create powerful branding, social media campaigns,
+            offline marketing, reels, AI automation,
+            and digital growth systems for modern businesses.
+          </p>
+
+          <div className="hero-actions hero-actions-animate">
+            <ArrowButton href="/contact-us">
+              Start Your Brand Journey
+            </ArrowButton>
+
+            <Link
+              href="#portfolio"
+              className="button ghost-button"
+            >
+              View Our Work
+            </Link>
           </div>
-        
+
+          <aside className="rating-strip rating-animate">
+            <p>
+              Campaign systems across digital, offline,
+              reels, and automation
+            </p>
+
+            <span>★★★★★</span>
+          </aside>
+
         </div>
       </div>
     </section>
@@ -723,8 +1157,8 @@ export function PortfolioGallery() {
             <article key={item.title} className={`portfolio-card tilt-card ${index === 0 ? 'featured' : ''}`}>
               <img src={item.image} alt="" />
               <div className="portfolio-overlay">
-                <p className="eyebrow">{item.label}</p>
-                <h3>{item.title}</h3>
+                <p className="eyebrow text-white">{item.label}</p>
+                <h3 className="text-white">{item.title}</h3>
                 <p>{item.text}</p>
               </div>
             </article>
@@ -737,34 +1171,12 @@ export function PortfolioGallery() {
 
 export function TestimonialsSection() {
   return (
-    <section className="section testimonials-section">
-      <div className="container">
-        <div className="agency-proof">
-          <div>
-            <p className="eyebrow">Client Voices</p>
-            <h2 className="section-title">Built for teams that want polished work and practical momentum</h2>
-          </div>
-          <img src={assets.card1} alt="" />
-        </div>
-        <div className="testimonial-grid">
-          {testimonials.map((testimonial) => (
-            <article className="testimonial-card tilt-card" key={testimonial.name}>
-              <span aria-hidden="true">“</span>
-              <p>{testimonial.quote}</p>
-              <div>
-                <strong>{testimonial.name}</strong>
-                <small>{testimonial.role}</small>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
+   <></>
   )
 }
 
 export function Marquee() {
-  const words = ['Brand Strategy', 'Digital Marketing', 'Social Media', 'Outdoor Marketing', 'Reels', 'SEO', 'Creative Design', 'Mobile Apps']
+  const words = ['Brand Strategy', 'Digital Marketing', 'Social Media', 'Offline Marketing', 'Reels', 'SEO', 'Creative Design', 'Mobile Apps']
   return (
     <div className="marquee" aria-hidden="true">
       <div className="marquee-track">
@@ -805,7 +1217,7 @@ export function CampaignMapSection() {
     if (reduceMotion) return
 
     const section = sectionRef.current
-    if (!section) return
+    if (!section) returnHigh-visibility
 
     const trigger = ScrollTrigger.create({
       trigger: section,
@@ -911,47 +1323,63 @@ export function AboutSection() {
 
 export function ServicesSection({ full = false }: { full?: boolean }) {
   return (
-    <section className="section dark" id="services">
+    <section className={`section services-section ${full ? 'services-page-section' : 'dark'}`} id="services">
       <div className="container">
-        <p className="eyebrow">Services</p>
-        <div className="split" style={{ alignItems: 'end' }}>
-          <h2 className="section-title">Digital and outdoor marketing services for brands that need visibility everywhere</h2>
-          <p className="body-copy">From search, websites, and social media to hoardings, print inserts, public spaces, and vehicle branding, we plan the full campaign path.</p>
-        </div>
-        {!full ? (
-          <div className="service-list-panels">
-            <article className="service-list-panel tilt-card">
-              <div className="service-panel-media">
-                <img src={assets.card8} alt="" />
-              </div>
-              <div className="service-panel-copy">
-                <p className="eyebrow">Services (Digital)</p>
-                <h3>Digital services for search, social, websites, and mobile growth</h3>
-                <ol>
-                  {digitalServices.map((service) => <li key={service}>{service}</li>)}
-                </ol>
-              </div>
-            </article>
-            <article className="service-list-panel outdoor tilt-card">
-              <div className="service-panel-media">
-                <img src={assets.card4} alt="" />
-              </div>
-              <div className="service-panel-copy">
-                <p className="eyebrow">Services (Outdoor)</p>
-                <h3>Outdoor services for public spaces, print, hoardings, and transit branding</h3>
-                <ol>
-                  {outdoorServices.map((service) => <li key={service}>{service}</li>)}
-                </ol>
-              </div>
-            </article>
+        <div className="services-section-head">
+          <div>
+            <p className="eyebrow">Services</p>
+            <h2 className="section-title">Marketing services for Brand systemsneed visibility everywhere</h2>
           </div>
-        ) : null}
+          <div className="services-head-copy">
+            <p className="body-copy">From search, websites, and social media to OOH, paper inserts, transit media, retail branding, signages, and activations, we plan the full campaign path.</p>
+            {full ? (
+              <div className="service-jump-links" aria-label="Service categories">
+                <Link href="#digital-services">Digital Services</Link>
+                <Link href="#offline-services">Offline Services</Link>
+              </div>
+            ) : null}
+          </div>
+        </div>
+        {full ? (
+          <div className="service-category-overview">
+            <Link href="#digital-services" className="service-category-card digital">
+              <img src={assets.card8} alt="" />
+              <div>
+                <span>Services (Digital)</span>
+                <h3>Search, social, websites, creative design, and mobile growth</h3>
+                <p>{digitalServices.length} focused digital services</p>
+              </div>
+            </Link>
+            <Link href="#offline-services" className="service-category-card outdoor">
+              <img src={assets.card4} alt="" />
+              <div>
+                <span>Services (Offline)</span>
+                <h3>OOH, print inserts, transit media, retail branding, and activations</h3>
+                <p>{offlineServices.length} high-impact offline services</p>
+              </div>
+            </Link>
+          </div>
+        ) : (
+          <div className="cinematic-service-grid">
+            {cinematicServices.map((service) => (
+              <article className="cinematic-service-card tilt-card" key={service.title}>
+                <span>{service.icon}</span>
+                <h3>{service.title}</h3>
+                <p>{service.text}</p>
+                <Link href="/services" className="service-detail-link">Explore service</Link>
+              </article>
+            ))}
+          </div>
+        )}
         {full ? (
           <div className="service-detail-groups">
-            <div className="service-detail-group">
+            <div className="service-detail-group" id="digital-services">
               <div className="service-detail-heading">
-                <p className="eyebrow">Services (Digital)</p>
-                <h3>Digital growth services with focused execution for every channel</h3>
+                <div>
+                  <p className="eyebrow">Services (Digital)</p>
+                  <h3>Digital growth services with focused execution for every channel</h3>
+                </div>
+                <p>Performance-led digital systems for discovery, conversion, retention, and brand consistency.</p>
               </div>
               <div className="service-detail-grid">
                 {digitalServiceCards.map((service, index) => (
@@ -970,20 +1398,23 @@ export function ServicesSection({ full = false }: { full?: boolean }) {
                 ))}
               </div>
             </div>
-            <div className="service-detail-group">
+            <div className="service-detail-group" id="offline-services">
               <div className="service-detail-heading">
-                <p className="eyebrow">Services (Outdoor)</p>
-                <h3>Outdoor visibility services for streets, print, transit, and public spaces</h3>
+                <div>
+                  <p className="eyebrow">Services (Offline)</p>
+                  <h3>Offline visibility services for print, OOH, transit, retail, and events</h3>
+                </div>
+                <p>High-recall offline campaigns designed for location, movement, footfall, retail visibility, and on-ground engagement.</p>
               </div>
               <div className="service-detail-grid outdoor-detail-grid">
-                {outdoorServiceCards.map((service, index) => (
+                {offlineServiceCards.map((service, index) => (
                   <article className="service-detail-card outdoor-detail-card tilt-card" key={service.title}>
                     <div className="service-detail-media">
                       <img src={service.image} alt="" />
                       <span>{String(index + 1).padStart(2, '0')}</span>
                     </div>
                     <div className="service-detail-copy">
-                      <p className="eyebrow">Outdoor</p>
+                      <p className="eyebrow">Offline</p>
                       <h4>{service.title}</h4>
                       <p>{service.text}</p>
                       <Link href="/contact-us" className="service-detail-link">Plan this service</Link>
@@ -992,20 +1423,6 @@ export function ServicesSection({ full = false }: { full?: boolean }) {
                 ))}
               </div>
             </div>
-          </div>
-        ) : null}
-        {!full ? (
-          <div className="service-grid">
-            {services.map((service) => (
-              <article key={service.title} className={`service-card tilt-card ${service.dark ? 'dark-card' : ''}`}>
-                <div className="card-media">
-                  <img src={service.image} alt="" />
-                </div>
-                <p className="eyebrow">{service.title.split(' ')[0]}</p>
-                <h3>{service.title}</h3>
-                <p className="body-copy" style={{ marginTop: 14 }}>{service.text}</p>
-              </article>
-            ))}
           </div>
         ) : null}
       </div>
@@ -1186,13 +1603,13 @@ export function OutdoorMarketingSection() {
     <section className="section" id="outdoor-marketing">
       <div className="container split">
         <div className="image-card">
-          <img src={assets.card4} alt="Outdoor Marketing" />
+          <img src={assets.card4} alt="Offline Marketing" />
         </div>
         <div>
-          <p className="eyebrow">Outdoor Marketing</p>
-          <h2 className="section-title">High-visibility campaigns for streets and public spaces</h2>
+          <p className="eyebrow">Offline Marketing</p>
+          <h2 className="section-title">High-visibility campaigns beyond the screen</h2>
           <p className="body-copy" style={{ marginTop: 20 }}>
-            We plan and design hoardings, paper inserts, public-place advertising, marketing collaterals, and vehicle branding. Strategic outdoor placements across bus, auto, and metro touchpoints to maximize brand visibility and impact.
+            We plan and design marketing collaterals, OOH, paper inserts, transit media, retail branding, signages, events, and activations that maximize recall in the real world.
           </p>
           <div style={{ marginTop: 32 }}>
             <ArrowButton href="/contact-us">Get Started</ArrowButton>
@@ -1206,175 +1623,74 @@ export function OutdoorMarketingSection() {
 export function ReelsSection() {
   const [activeIndex, setActiveIndex] = useState(0)
   const shellRef = useRef<HTMLDivElement>(null)
-  const trackRef = useRef<HTMLDivElement>(null)
 
   const goToSlide = (index: number) => {
     const nextIndex = (index + reelsItems.length) % reelsItems.length
     setActiveIndex(nextIndex)
   }
 
-  useEffect(() => {
-    const shell = shellRef.current
-    const track = trackRef.current
-    if (!shell || !track) return
+  const getOffset = (index: number) => {
+    const rawOffset = index - activeIndex
+    const midpoint = Math.floor(reelsItems.length / 2)
 
-    const ctx = gsap.context(() => {
-      gsap.to(track, {
-        xPercent: -activeIndex * 100,
-        duration: 0.85,
-        ease: 'power3.inOut',
-      })
-    }, shell)
-
-    return () => ctx.revert()
-  }, [activeIndex])
+    if (rawOffset > midpoint) return rawOffset - reelsItems.length
+    if (rawOffset < -midpoint) return rawOffset + reelsItems.length
+    return rawOffset
+  }
 
   return (
-    <section className="section" id="reels">
-      <div className="container">
-        <div style={{ marginBottom: 56 }}>
-          <p className="eyebrow">Reels & Short-Form Video</p>
-          <h2 className="section-title">Short-form video concepts that move fast</h2>
-          <p className="body-copy" style={{ marginTop: 20, maxWidth: 620 }}>
-            We build reels from idea to final edit: hooks, scripts, visual systems, motion direction, and campaign-ready formats optimized for social platforms.
-          </p>
-        </div>
-
-        <div ref={shellRef} className="reels-carousel" style={{ position: 'relative', overflow: 'hidden' }}>
-          <div ref={trackRef} style={{ display: 'flex', width: '100%' }}>
-            {reelsItems.map((reel, index) => (
-              <div
-                key={reel.title}
-                style={{
-                  minWidth: '100%',
-                  padding: '0 12px',
-                  boxSizing: 'border-box',
-                }}
-              >
-                <div
-                  className="reel-card"
-                  style={{
-                    position: 'relative',
-                    height: 480,
-                    borderRadius: 24,
-                    overflow: 'hidden',
-                    background: `linear-gradient(135deg, ${reel.color}20 0%, ${reel.color}05 100%)`,
-                    border: `1px solid rgba(255,255,255,0.08)`,
-                  }}
-                >
-                  <img
-                    src={reel.thumbnail}
-                    alt={reel.title}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      padding: 24,
-                      background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)',
-                      color: 'white',
-                    }}
-                  >
-                    <p style={{ fontSize: 12, opacity: 0.7, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                      {reel.category}
-                    </p>
-                    <h3 style={{ fontSize: 22, fontWeight: 700, marginBottom: 8 }}>{reel.title}</h3>
-                    <p style={{ fontSize: 14, opacity: 0.9, lineHeight: 1.6 }}>{reel.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Navigation Arrows */}
+    <section className="reels-showcase section" id="reels">
+      <div className="reels-container">
+       
+        <div ref={shellRef} className="reels-coverflow-shell">
           <button
+            className="reels-nav reels-nav-prev"
             onClick={() => goToSlide(activeIndex - 1)}
-            style={{
-              position: 'absolute',
-              left: -48,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              width: 44,
-              height: 44,
-              borderRadius: '50%',
-              background: 'rgba(255,255,255,0.08)',
-              border: '1px solid rgba(255,255,255,0.12)',
-              color: 'white',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 20,
-              transition: 'all 0.2s ease',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(255,255,255,0.15)'
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'rgba(255,255,255,0.08)'
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'
-            }}
             aria-label="Previous reel"
           >
-            ←
+            ‹
           </button>
+
+          <div className="reels-coverflow" aria-live="polite">
+            {reelsItems.map((reel, index) => {
+              const offset = getOffset(index)
+              const isVisible = Math.abs(offset) <= 2
+
+              return (
+                <article
+                  className={`reel-phone-card reel-offset-${offset + 2} ${offset === 0 ? 'is-active' : ''}`}
+                  key={reel.title}
+                  aria-hidden={!isVisible}
+                  onClick={() => goToSlide(index)}
+                >
+                  <div className="reel-phone-media">
+                    <img src={reel.thumbnail} alt={reel.title} />
+                    <div className="reel-card-brand">Bravera</div>
+                    <div className="reel-play" aria-hidden="true">▶</div>
+                    <div className="reel-card-caption">
+                      <span>{reel.category}</span>
+                      <strong>{reel.title}</strong>
+                    </div>
+                  </div>
+                </article>
+              )
+            })}
+          </div>
 
           <button
+            className="reels-nav reels-nav-next"
             onClick={() => goToSlide(activeIndex + 1)}
-            style={{
-              position: 'absolute',
-              right: -48,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              width: 44,
-              height: 44,
-              borderRadius: '50%',
-              background: 'rgba(255,255,255,0.08)',
-              border: '1px solid rgba(255,255,255,0.12)',
-              color: 'white',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 20,
-              transition: 'all 0.2s ease',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(255,255,255,0.15)'
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'rgba(255,255,255,0.08)'
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'
-            }}
             aria-label="Next reel"
           >
-            →
+            ›
           </button>
 
-          {/* Indicators */}
-          <div style={{ display: 'flex', gap: 8, justifyContent: 'center', marginTop: 32 }}>
+          <div className="reels-dots" aria-label="Reel navigation">
             {reelsItems.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setActiveIndex(index)}
-                style={{
-                  width: activeIndex === index ? 32 : 8,
-                  height: 8,
-                  borderRadius: 999,
-                  background: activeIndex === index ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.2)',
-                  border: 'none',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                }}
+                className={activeIndex === index ? 'active' : ''}
                 aria-label={`Go to reel ${index + 1}`}
               />
             ))}
