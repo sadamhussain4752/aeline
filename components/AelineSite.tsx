@@ -1217,7 +1217,7 @@ export function CampaignMapSection() {
     if (reduceMotion) return
 
     const section = sectionRef.current
-    if (!section) returnHigh-visibility
+    if (!section) return
 
     const trigger = ScrollTrigger.create({
       trigger: section,
