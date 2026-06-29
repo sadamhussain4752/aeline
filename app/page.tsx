@@ -18,8 +18,8 @@ export default function Home() {
         <Hero />
         <Marquee />
         <CampaignMapSection />
-        <ServicesSection />
-        <PortfolioGallery />
+        {/* <ServicesSection /> */}
+        {/* <PortfolioGallery /> */}
         <ReelsSection />
         <TestimonialsSection />
         <FAQSection />

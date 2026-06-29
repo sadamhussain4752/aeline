@@ -12,13 +12,13 @@ export default function ServicesPage() {
       />
             <ServicesSection full />
 
-      <Marquee />
+      {/* <Marquee /> */}
       {/* <ExpertiseSection /> */}
       <section className="section">
         <div className="container split">
           <div>
-            <p className="eyebrow">Why us</p>
-            <h2 className="section-title">We build solutions that create real, measurable impact</h2>
+            <p className="eyebrow font-bold-1">Why us</p>
+            <h2 className="section-title font-bold-1">We build solutions that create real, measurable impact</h2>
           </div>
           <p className="body-copy">
             Our approach blends strategic consulting, human-centered design, and advanced AI, giving you the clarity, tools, and confidence to thrive in the age of intelligence.

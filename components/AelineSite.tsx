@@ -383,7 +383,7 @@ export function Footer() {
 
         <div className="footer-bottom">
           <p>© 2026 Bravera Inc. All rights reserved.</p>
-          <div className="footer-note">Built with Next.js & Three.js</div>
+          
         </div>
       </div>
     </footer>
@@ -1285,8 +1285,8 @@ export function AboutSection() {
     <section className="section about-webflow" id="about">
       <div className="container">
         <div className="about-heading">
-          <p className="eyebrow">· About us</p>
-          <h2 className="section-title about-title">
+          <p className="eyebrow font-bold-1">· About us</p>
+          <h2 className="section-title about-title font-bold-1">
             A global consulting partner dedicated to building <span className="icon-badge blue" /> smarter <span className="muted-line">and <span className="icon-badge lime" /> more adaptive</span>
           </h2>
         </div>
@@ -1325,59 +1325,15 @@ export function ServicesSection({ full = false }: { full?: boolean }) {
   return (
     <section className={`section services-section ${full ? 'services-page-section' : 'dark'}`} id="services">
       <div className="container">
-        <div className="services-section-head">
-          <div>
-            <p className="eyebrow">Services</p>
-            <h2 className="section-title">Marketing services for Brand systemsneed visibility everywhere</h2>
-          </div>
-          <div className="services-head-copy">
-            <p className="body-copy">From search, websites, and social media to OOH, paper inserts, transit media, retail branding, signages, and activations, we plan the full campaign path.</p>
-            {full ? (
-              <div className="service-jump-links" aria-label="Service categories">
-                <Link href="#digital-services">Digital Services</Link>
-                <Link href="#offline-services">Offline Services</Link>
-              </div>
-            ) : null}
-          </div>
-        </div>
-        {full ? (
-          <div className="service-category-overview">
-            <Link href="#digital-services" className="service-category-card digital">
-              <img src={assets.card8} alt="" />
-              <div>
-                <span>Services (Digital)</span>
-                <h3>Search, social, websites, creative design, and mobile growth</h3>
-                <p>{digitalServices.length} focused digital services</p>
-              </div>
-            </Link>
-            <Link href="#offline-services" className="service-category-card outdoor">
-              <img src={assets.card4} alt="" />
-              <div>
-                <span>Services (Offline)</span>
-                <h3>OOH, print inserts, transit media, retail branding, and activations</h3>
-                <p>{offlineServices.length} high-impact offline services</p>
-              </div>
-            </Link>
-          </div>
-        ) : (
-          <div className="cinematic-service-grid">
-            {cinematicServices.map((service) => (
-              <article className="cinematic-service-card tilt-card" key={service.title}>
-                <span>{service.icon}</span>
-                <h3>{service.title}</h3>
-                <p>{service.text}</p>
-                <Link href="/services" className="service-detail-link">Explore service</Link>
-              </article>
-            ))}
-          </div>
-        )}
+        
+       
         {full ? (
           <div className="service-detail-groups">
             <div className="service-detail-group" id="digital-services">
               <div className="service-detail-heading">
                 <div>
                   <p className="eyebrow">Services (Digital)</p>
-                  <h3>Digital growth services with focused execution for every channel</h3>
+                  <h3 className="font-bold-1">Digital growth services with focused execution for every channel</h3>
                 </div>
                 <p>Performance-led digital systems for discovery, conversion, retention, and brand consistency.</p>
               </div>
@@ -1390,7 +1346,7 @@ export function ServicesSection({ full = false }: { full?: boolean }) {
                     </div>
                     <div className="service-detail-copy">
                       <p className="eyebrow">Digital</p>
-                      <h4>{service.title}</h4>
+                      <h4 className="font-bold-1">{service.title}</h4>
                       <p>{service.text}</p>
                       <Link href="/contact-us" className="service-detail-link">Plan this service</Link>
                     </div>
@@ -1402,7 +1358,7 @@ export function ServicesSection({ full = false }: { full?: boolean }) {
               <div className="service-detail-heading">
                 <div>
                   <p className="eyebrow">Services (Offline)</p>
-                  <h3>Offline visibility services for print, OOH, transit, retail, and events</h3>
+                  <h3 className="font-bold-1">Offline visibility services for print, OOH, transit, retail, and events</h3>
                 </div>
                 <p>High-recall offline campaigns designed for location, movement, footfall, retail visibility, and on-ground engagement.</p>
               </div>
@@ -1415,7 +1371,7 @@ export function ServicesSection({ full = false }: { full?: boolean }) {
                     </div>
                     <div className="service-detail-copy">
                       <p className="eyebrow">Offline</p>
-                      <h4>{service.title}</h4>
+                      <h4 className="font-bold-1">{service.title}</h4>
                       <p>{service.text}</p>
                       <Link href="/contact-us" className="service-detail-link">Plan this service</Link>
                     </div>
@@ -1435,14 +1391,14 @@ export function ExpertiseSection() {
     <section className="section">
       <div className="container split">
         <div className="metric-panel">
-          <p className="eyebrow">Monthly expanse</p>
+          <p className="eyebrow font-bold-1">Monthly expanse</p>
           <h3 style={{ color: '#fff', fontSize: 56, letterSpacing: '-.06em' }}>$4900 <small style={{ fontSize: 18, color: 'rgba(255,255,255,.5)' }}>/ $10,000</small></h3>
           <div className="progress" style={{ margin: '26px 0' }}><span style={{ width: '49%' }} /></div>
           <p className="body-copy">Performance in the past 7 days: 49% business growth, +2.5% week over week.</p>
         </div>
         <div>
           <p className="eyebrow">Expertise</p>
-          <h2 className="section-title">Where human insight meets intelligent technology</h2>
+          <h2 className="section-title font-bold-1">Where human insight meets intelligent technology</h2>
           <p className="body-copy" style={{ marginTop: 20 }}>
             Our expertise combines strategy, data, and artificial intelligence to amplify creativity and enable smarter decisions.
           </p>
@@ -1491,9 +1447,9 @@ export function BlogSection() {
   return (
     <section className="section" id="stories">
       <div className="container">
-        <p className="eyebrow">Stories</p>
+        <p className="eyebrow font-bold-1">Stories</p>
         <div className="split" style={{ alignItems: 'end' }}>
-          <h2 className="section-title">Latest stories and trends</h2>
+          <h2 className="section-title font-bold-1">Latest stories and trends</h2>
           <p className="body-copy">Whether you’re optimizing today or building for tomorrow, we help you move faster with confidence.</p>
         </div>
         <div className="blog-grid">
@@ -1519,11 +1475,11 @@ export function FAQSection() {
     <section className="section tight" id="faq">
       <div className="container">
         <p className="eyebrow">FAQ</p>
-        <h2 className="section-title">Frequently asked questions</h2>
+        <h2 className="section-title font-bold-1">Frequently asked questions</h2>
         <div className="faq-list">
           {faqs.map((faq) => (
             <article key={faq.question} className="faq-item">
-              <h3>{faq.question}</h3>
+              <h3 className="font-bold-1">{faq.question}</h3>
               <p className="body-copy">{faq.answer}</p>
             </article>
           ))}
@@ -1563,9 +1519,9 @@ export function PageHero({
   return (
     <section className="page-hero">
       <div className="container">
-        <div>
+        <div className="">
           <p className="eyebrow">{eyebrow}</p>
-          <h1>{title}</h1>
+          <h1 className="section-title font-bold-1">{title}</h1>
           <p className="lead">{text}</p>
         </div>
         <div className="page-hero-visual">

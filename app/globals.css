@@ -456,7 +456,7 @@ img {
   top: 50%;
   width: 80px;
   height: 52vw;
-  background-image: url("/gamusa-pattern-left.webp");
+  /* background-image: url("/gamusa-pattern-left.webp"); */
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
@@ -2139,9 +2139,9 @@ img {
   content: "";
   position: absolute;
   inset: 0;
-  background:
+  /* background:
     radial-gradient(circle at 68% 42%, rgba(255, 255, 255, 0.22), transparent 31%),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.2), transparent 64%);
+    linear-gradient(90deg, rgba(0, 0, 0, 0.2), transparent 64%); */
   pointer-events: none;
 }
 
@@ -3225,6 +3225,13 @@ img {
   display: grid;
   gap: 14px;
   margin-top: 36px;
+}
+
+#faq,
+#faq .faq-item,
+#faq .faq-item h3,
+#faq .faq-item p {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .faq-item {
@@ -4835,4 +4842,7 @@ body,
   .service-showcase-card {
     min-height: 300px;
   }
+}
+.font-bold-1 {
+  font-weight: 700 !important;
 }

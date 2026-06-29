@@ -77,7 +77,7 @@ export default function Footer() {
               </span>
             </Link>
 
-            <p className="text-sm text-white/40 leading-relaxed mb-8 max-w-xs">
+            <p className="text-sm text-white/40 leading-relaxed mb-8 max-w-xs font-bold-1">
               Easily adapt to changes and scale your operations with our flexible infrastructure,
               designed to support your business growth.
             </p>

@@ -40,15 +40,15 @@ export default function ContactPage() {
       
       <section className="section">
         <div className="container">
-          <p className="eyebrow">Get Started</p>
-          <h2 className="section-title">Let’s talk about your next stage of growth</h2>
+          <p className="eyebrow font-bold-1">Get Started</p>
+          <h2 className="section-title font-bold-1">Let’s talk about your next stage of growth</h2>
           <div className="contact-grid">
             <aside className="contact-card">
-              <h3>Contact details</h3>
+              <h3 className="font-bold-1">Contact details</h3>
               <p className="body-copy" style={{ marginTop: 14 }}>hello@bravera.ai</p>
               <p className="body-copy">130 Strategy Street, New York, NY</p>
               <p className="body-copy">Monday to Friday, 9:00 AM - 6:00 PM</p>
-              <p className="body-copy" style={{ marginTop: 16, color: 'rgba(0,0,0,0.8)' }}><strong>{leadCount}</strong> leads captured</p>
+              <p className="body-copy" style={{ marginTop: 16, color: 'rgba(0,0,0,0.8)' }}></p>
             </aside>
             <form className="contact-form" onSubmit={handleSubmit}>
               <input

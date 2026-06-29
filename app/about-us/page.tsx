@@ -23,7 +23,7 @@ export default function AboutUsPage() {
       <section className="section">
         <div className="container">
           <p className="eyebrow">Our journey</p>
-          <h2 className="section-title">Our journey toward intelligent transformation</h2>
+          <h2 className="section-title font-bold-1">Our journey toward intelligent transformation</h2>
           <p className="body-copy" style={{ marginTop: 18, maxWidth: 680 }}>
             From our early days as a small consulting team to becoming a trusted AI partner for global organizations, our journey has been driven by curiosity, collaboration, and impact.
           </p>
