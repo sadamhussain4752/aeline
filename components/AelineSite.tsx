@@ -373,17 +373,41 @@ export function Footer() {
           </div>
 
           <nav className="footer-links" aria-label="Footer navigation">
-            {navLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                {link.label}
-              </Link>
-            ))}
+            <div>
+              <h3>Company</h3>
+              {navLinks.map((link) => (
+                <Link key={link.href} href={link.href}>
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+            <div>
+              <h3>Digital</h3>
+              {['Digital Marketing', 'SEO', 'Website Design', 'Social Media'].map((item) => (
+                <Link key={item} href="/services#digital-services">
+                  {item}
+                </Link>
+              ))}
+            </div>
+            <div>
+              <h3>Offline</h3>
+              {['Marketing Collaterals', 'Out of Home', 'Transit Media', 'Retail Branding'].map((item) => (
+                <Link key={item} href="/services#offline-services">
+                  {item}
+                </Link>
+              ))}
+            </div>
+            <div>
+              <h3>Contact</h3>
+              <a href="mailto:hello@bravera.in">hello@bravera.in</a>
+              <Link href="/contact-us">Start a project</Link>
+            </div>
           </nav>
         </div>
 
         <div className="footer-bottom">
           <p>© 2026 Bravera Inc. All rights reserved.</p>
-          
+          <p>Inspire. Create. Achieve.</p>
         </div>
       </div>
     </footer>
@@ -471,14 +495,6 @@ const ctx = gsap.context(() => {
     duration: 0.8,
     delay: 1.1,
     ease: 'back.out(1.7)',
-  })
-
-  gsap.from('.rating-strip', {
-    x: 60,
-    opacity: 0,
-    duration: 0.8,
-    delay: 1.25,
-    ease: 'power3.out',
   })
 
   // Hero scroll parallax
@@ -882,15 +898,15 @@ export function Hero() {
   return (
     <section className="hero">
       <div className="hero-frame">
-        <BraveraHeroScene />
+        {/* <BraveraHeroScene /> */}
 
-        <div className="hero-visual-stack" aria-hidden="true">
+        {/* <div className="hero-visual-stack" aria-hidden="true">
           <span className="glass-orb glass-orb-main" />
           <span className="glass-orb glass-orb-blue" />
           <span className="glass-orb glass-orb-pink" />
           <span className="neon-line neon-line-one" />
           <span className="neon-line neon-line-two" />
-        </div>
+        </div> */}
 
         <div className="hero-noise" />
 
@@ -924,23 +940,7 @@ export function Hero() {
             <ArrowButton href="/contact-us">
               Start Your Brand Journey
             </ArrowButton>
-
-            <Link
-              href="#portfolio"
-              className="button ghost-button"
-            >
-              View Our Work
-            </Link>
           </div>
-
-          <aside className="rating-strip rating-animate">
-            <p>
-              Campaign systems across digital, offline,
-              reels, and automation
-            </p>
-
-            <span>★★★★★</span>
-          </aside>
 
         </div>
       </div>
@@ -1496,7 +1496,7 @@ export function CTASection() {
         <div className="cta-band">
           <div>
             <p className="eyebrow">Get Started</p>
-            <h2 className="section-title">We combine human insight with artificial intelligence</h2>
+            <h2 className="section-title font-bold-1">We combine human insight with artificial intelligence</h2>
           </div>
           <ArrowButton href="/contact-us">Contact us</ArrowButton>
         </div>
