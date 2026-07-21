@@ -1,4 +1,4 @@
-import { AboutSection, CTASection, ExpertiseSection, Marquee, PageHero, PageShell } from '@/components/AelineSite'
+import { AboutSection, CTASection, Marquee, PageHero, PageShell } from '@/components/AelineSite'
 import { assets } from '@/components/aeline-content'
 
 const milestones = [
@@ -17,7 +17,6 @@ export default function AboutUsPage() {
         text="We are a consulting and AI innovation firm dedicated to helping organizations think smarter, move faster, and grow stronger."
         image={assets.about}
       />
-      <ExpertiseSection />
       <AboutSection />
       <Marquee />
       <section className="section">

@@ -8,6 +8,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { getStoredPosts } from './local-data'
 import { assets, faqs, plans, posts } from './aeline-content'
+import { digitalServiceCards, digitalServices, offlineServiceCards, offlineServices } from './service-data'
 
 const BraveraHeroScene = dynamic(() => import('./BraveraHeroScene'), { ssr: false })
 
@@ -16,90 +17,6 @@ const navLinks = [
   { href: '/services', label: 'Services' },
   { href: '/stories', label: 'Stories' },
   { href: '/contact-us', label: 'Contact Us' },
-]
-
-const digitalServices = [
-  'Digital Marketing Service',
-  'SEO',
-  'Website Design Development',
-  'Social Media Marketing',
-  'Creative Designing',
-  'Mobile Application',
-]
-
-const offlineServices = [
-  'Marketing Collaterals',
-  'Out of Home',
-  'Paper insert',
-  'Transit Media',
-  'Retail Branding & Signages',
-  'Events and activations',
-]
-
-const digitalServiceCards = [
-  {
-    title: 'Digital Marketing Service',
-    text: 'Performance campaigns, content planning, audience targeting, and reporting built to turn attention into measurable leads.',
-    image: assets.card8,
-  },
-  {
-    title: 'SEO',
-    text: 'Technical SEO, keyword planning, content structure, and search visibility improvements for long-term organic growth.',
-    image: 'https://images.unsplash.com/photo-1562577309-4932fdd64cd1?auto=format&fit=crop&w=1200&q=85',
-  },
-  {
-    title: 'Website Design Development',
-    text: 'Modern websites with clear UX, fast performance, responsive layouts, and conversion-focused content presentation.',
-    image: assets.card1,
-  },
-  {
-    title: 'Social Media Marketing',
-    text: 'Daily creative systems for social posts, campaigns, community growth, paid promotion, and platform-ready brand content.',
-    image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&w=1200&q=85',
-  },
-  {
-    title: 'Creative Designing',
-    text: 'Campaign visuals, brand assets, launch graphics, print-ready layouts, and digital creatives with one consistent style.',
-    image: assets.about,
-  },
-  {
-    title: 'Mobile Application',
-    text: 'User-friendly mobile app experiences, interface planning, feature flows, and scalable product presentation.',
-    image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=1200&q=85',
-  },
-]
-
-const offlineServiceCards = [
-  {
-    title: 'Marketing Collaterals',
-    text: 'Brochures, flyers, posters, product sheets, and branded print assets designed for strong offline recall.',
-    image: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=1200&q=85',
-  },
-  {
-    title: 'Out of Home',
-    text: 'Large-format OOH campaigns with bold messaging, clean layouts, and high-distance readability.',
-    image: assets.card4,
-  },
-  {
-    title: 'Paper insert',
-    text: 'Newspaper and leaflet insert campaigns planned with clear offers, local reach, and sharp print design.',
-    image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=85',
-  },
-  {
-    title: 'Transit Media',
-    text: 'Campaign systems for buses, autos, metro placements, stations, and moving audience impressions.',
-    image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=85',
-  },
-  {
-    title: 'Retail Branding & Signages',
-    text: 'In-store visibility, fascia design, wayfinding, POSM, and signage systems for stronger retail presence.',
-    image: 'https://images.unsplash.com/photo-1607082349566-187342175e2f?auto=format&fit=crop&w=1200&q=85',
-  },
-  {
-    title: 'Events and activations',
-    text: 'Launch events, booth branding, on-ground activations, and audience engagement ideas built for recall.',
-    image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=85',
-  },
 ]
 
 const campaignSections = [
@@ -328,18 +245,13 @@ export function Navbar() {
                 >
                   {link.label}
                 </Link>
-                <div className="services-mega-menu" role="menu" aria-label="Services menu">
-                  <Link href="/services#offline-services" className="mega-feature outdoor" role="menuitem">
-                    <span className="mega-kicker">Services (Offline)</span>
-                    <strong>Offline Services</strong>
-                    <small>Know More</small>
+                <div className="services-mega-menu simple-services-menu" role="menu" aria-label="Services menu">
+                  <Link href="/services#digital-services" role="menuitem">
+                    Digital Services
                   </Link>
-                  <Link href="/services#digital-services" className="mega-feature digital" role="menuitem">
-                    <span className="mega-kicker">Digital Services</span>
-                    <strong>Digital Services</strong>
-                    <small>Know More</small>
+                  <Link href="/services#offline-services" role="menuitem">
+                    Offline Services
                   </Link>
-                 
                 </div>
               </div>
             )
@@ -407,7 +319,6 @@ export function Footer() {
 
         <div className="footer-bottom">
           <p>© 2026 Bravera Inc. All rights reserved.</p>
-          <p>Inspire. Create. Achieve.</p>
         </div>
       </div>
     </footer>
@@ -569,7 +480,7 @@ const ctx = gsap.context(() => {
     ease: 'power3.out',
   })
 
-  reveal('.about-stats .stat-card', {
+  reveal('.about-leadership .leader-card', {
     y: 70,
     opacity: 0,
     rotate: -3,
@@ -884,15 +795,21 @@ const ctx = gsap.context(() => {
 
 
 export function Hero() {
-  const words = [
-    { text: 'Building', className: 'hero-word slide-up' },
-    { text: 'Brands', className: 'hero-word rotate-in' },
-    { text: 'That', className: 'hero-word blur-in' },
-    { text: 'Move', className: 'hero-word zoom-in' },
-    { text: 'People', className: 'hero-word slide-right' },
-    { text: 'Online', className: 'hero-word fade-up' },
-    { text: '&', className: 'hero-word spin-in' },
-    { text: 'Offline', className: 'hero-word glow-in' },
+  const headlineLines = [
+    [
+      { text: 'Building', className: 'hero-word slide-up' },
+      { text: 'Brands', className: 'hero-word rotate-in' },
+    ],
+    [
+      { text: 'That', className: 'hero-word blur-in' },
+      { text: 'Move', className: 'hero-word zoom-in' },
+      { text: 'People', className: 'hero-word slide-right' },
+    ],
+    [
+      { text: 'Online', className: 'hero-word fade-up' },
+      { text: '&', className: 'hero-word spin-in' },
+      { text: 'Offline', className: 'hero-word glow-in' },
+    ],
   ]
 
   return (
@@ -917,15 +834,25 @@ export function Hero() {
           </p>
 
           <h1 className="hero-title">
-            {words.map((item, index) => (
-              <span
-                key={item.text}
-                className={item.className}
-                style={{
-                  animationDelay: `${index * 0.15}s`,
-                }}
-              >
-                {item.text}
+            {headlineLines.map((line, lineIndex) => (
+              <span className="hero-line" key={`hero-line-${lineIndex}`}>
+                {line.map((item, wordIndex) => {
+                  const animationIndex = headlineLines
+                    .slice(0, lineIndex)
+                    .reduce((total, currentLine) => total + currentLine.length, wordIndex)
+
+                  return (
+                    <span
+                      key={item.text}
+                      className={item.className}
+                      style={{
+                        animationDelay: `${animationIndex * 0.15}s`,
+                      }}
+                    >
+                      {item.text}
+                    </span>
+                  )
+                })}
               </span>
             ))}
           </h1>
@@ -1181,7 +1108,7 @@ export function Marquee() {
     <div className="marquee" aria-hidden="true">
       <div className="marquee-track">
         {[...words, ...words].map((word, index) => (
-          <span key={`${word}-${index}`}>{word}</span>
+          <span key={`${word}-${index}`}><i aria-hidden="true" />{word}</span>
         ))}
       </div>
     </div>
@@ -1190,8 +1117,13 @@ export function Marquee() {
 
 export function CampaignMapSection() {
   const sectionRef = useRef<HTMLElement | null>(null)
+  const activeIndexRef = useRef(0)
   const [activeIndex, setActiveIndex] = useState(0)
   const activeSection = campaignSections[activeIndex]
+
+  useEffect(() => {
+    activeIndexRef.current = activeIndex
+  }, [activeIndex])
 
   useEffect(() => {
     const image = document.querySelector('.adams-product-image')
@@ -1219,7 +1151,56 @@ export function CampaignMapSection() {
     const section = sectionRef.current
     if (!section) return
 
-    const trigger = ScrollTrigger.create({
+    let trigger: ScrollTrigger
+    let wheelLocked = false
+    let isProgrammaticScroll = false
+    let unlockTimer: number | null = null
+
+    const scrollToIndex = (index: number) => {
+      const nextIndex = Math.max(0, Math.min(campaignSections.length - 1, index))
+      const progress = nextIndex / (campaignSections.length - 1)
+      const targetScroll = trigger.start + (trigger.end - trigger.start) * progress
+
+      if (unlockTimer) window.clearTimeout(unlockTimer)
+      wheelLocked = true
+      isProgrammaticScroll = true
+      activeIndexRef.current = nextIndex
+      setActiveIndex(nextIndex)
+
+      window.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth',
+      })
+
+      unlockTimer = window.setTimeout(() => {
+        window.scrollTo({ top: targetScroll, behavior: 'auto' })
+        activeIndexRef.current = nextIndex
+        setActiveIndex(nextIndex)
+        wheelLocked = false
+        isProgrammaticScroll = false
+        trigger.update()
+      }, 760)
+    }
+
+    const onWheel = (event: WheelEvent) => {
+      if (!trigger?.isActive || isProgrammaticScroll) return
+
+      const direction = Math.sign(event.deltaY)
+      if (direction === 0) return
+
+      const currentIndex = activeIndexRef.current
+      const isAtStart = currentIndex === 0 && direction < 0
+      const isAtEnd = currentIndex === campaignSections.length - 1 && direction > 0
+
+      if (isAtStart || isAtEnd) return
+
+      event.preventDefault()
+      if (wheelLocked) return
+
+      scrollToIndex(currentIndex + direction)
+    }
+
+    trigger = ScrollTrigger.create({
       trigger: section,
       start: 'top top',
       end: () => `+=${window.innerHeight * (campaignSections.length - 1)}`,
@@ -1228,16 +1209,23 @@ export function CampaignMapSection() {
       scrub: 0.6,
       anticipatePin: 1,
       onUpdate: (self) => {
+        if (isProgrammaticScroll) return
+
         const nextIndex = Math.min(
           campaignSections.length - 1,
           Math.round(self.progress * (campaignSections.length - 1))
         )
+        activeIndexRef.current = nextIndex
         setActiveIndex((currentIndex) => (currentIndex === nextIndex ? currentIndex : nextIndex))
       },
     })
 
+    window.addEventListener('wheel', onWheel, { passive: false })
+
     return () => {
+      if (unlockTimer) window.clearTimeout(unlockTimer)
       trigger.kill()
+      window.removeEventListener('wheel', onWheel)
     }
   }, [])
 
@@ -1281,6 +1269,21 @@ export function CampaignMapSection() {
 }
 
 export function AboutSection() {
+  const leaders = [
+    {
+      name: 'CEO Name',
+      role: 'Founder & CEO',
+      text: "Leads Bravera's growth vision, client partnerships, and brand strategy direction.",
+      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=85',
+    },
+    {
+      name: 'Director Name',
+      role: 'Creative & Growth Director',
+      text: 'Guides creative execution, campaign planning, and measurable business outcomes.',
+      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=900&q=85',
+    },
+  ]
+
   return (
     <section className="section about-webflow" id="about">
       <div className="container">
@@ -1290,31 +1293,17 @@ export function AboutSection() {
             A global consulting partner dedicated to building <span className="icon-badge blue" /> smarter <span className="muted-line">and <span className="icon-badge lime" /> more adaptive</span>
           </h2>
         </div>
-        <div className="stats-grid about-stats">
-          <div className="stat-card stat-soft tilt-card">
-            <div className="pill-cloud">
-              {['Startup Feel', 'Professional', 'Strategic', 'AI-Focused', 'Grow Faster', 'Build Smart', 'Simple'].map((item) => <span key={item}>{item}</span>)}
-            </div>
-            <span>Continents</span>
-            <strong>20+</strong>
-          </div>
-          <div className="stat-card stat-lime tilt-card">
-            <span>Commitment to measurable</span>
-            <strong>100%</strong>
-            <p>Collaborating with leading AI and cloud technology providers.</p>
-          </div>
-          <div className="stat-card stat-image tilt-card">
-            <img src={assets.card4} alt="" />
-            <div>
-              <strong>120+</strong>
-              <p>Collaborating with leading AI and cloud technology providers.</p>
-            </div>
-          </div>
-          <div className="stat-card stat-soft tilt-card">
-            <span>Data Points</span>
-            <strong>520k+</strong>
-            <p>Analyzed monthly to power smarter business strategies.</p>
-          </div>
+        <div className="about-leadership">
+          {leaders.map((leader) => (
+            <article className="leader-card tilt-card" key={leader.role}>
+              <img src={leader.image} alt={`${leader.name} - ${leader.role}`} />
+              <div className="leader-card-content">
+                <span>{leader.role}</span>
+                <h3 className="font-bold-1">{leader.name}</h3>
+                <p>{leader.text}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -1348,7 +1337,7 @@ export function ServicesSection({ full = false }: { full?: boolean }) {
                       <p className="eyebrow">Digital</p>
                       <h4 className="font-bold-1">{service.title}</h4>
                       <p>{service.text}</p>
-                      <Link href="/contact-us" className="service-detail-link">Plan this service</Link>
+                      <Link href={`/services/${service.slug}`} className="service-detail-link">View Service</Link>
                     </div>
                   </article>
                 ))}
@@ -1373,7 +1362,7 @@ export function ServicesSection({ full = false }: { full?: boolean }) {
                       <p className="eyebrow">Offline</p>
                       <h4 className="font-bold-1">{service.title}</h4>
                       <p>{service.text}</p>
-                      <Link href="/contact-us" className="service-detail-link">Plan this service</Link>
+                      <Link href={`/services/${service.slug}`} className="service-detail-link">View Service</Link>
                     </div>
                   </article>
                 ))}
